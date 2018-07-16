@@ -41,21 +41,29 @@ const nonVeg = [
   },
 ];
 class Food extends Component {
-  static navigationOptions = {
-    title: 'Home',
-    headerRight: (
-      <View style={{ marginRight: 15, flexDirection: 'row' }}>
-        <FontAwesome name="shopping-cart" size={25} color="white" />
-        <Text style={{ marginLeft: -4,  fontWeight: 'bold', marginTop: -4 }}>2</Text>
-      </View>
-    ),
-    headerStyle: {
-      backgroundColor: '#FDA400',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Home',
+      headerRight: (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('cart')}
+        >
+        <View
+          style={{ marginRight: 15, flexDirection: 'row' }}>
+          <FontAwesome name="shopping-cart" size={25} color="white" />
+          <Text style={{ marginLeft: -4,  fontWeight: 'bold', marginTop: -4 }}>2</Text>
+        </View>
+        </TouchableOpacity>
+      ),
+      headerStyle: {
+        backgroundColor: '#FDA400',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    };
+
   };
   constructor(props) {
     super(props);
@@ -64,6 +72,12 @@ class Food extends Component {
       size: { width, height },
     };
   }
+  // componentDidMount() {
+  //   this.props.navigation.setParams({ gotoCart: this.gotoCart() });
+  // }
+  // gotoCart() {
+  //   this.props.navigation.navigate('cart');
+  // }
   _onLayoutDidChange = (e) => {
    const layout = e.nativeEvent.layout;
    this.setState({ size: { width: layout.width, height: layout.height } });
@@ -108,18 +122,20 @@ class Food extends Component {
   						<Image source={{ uri: 'http://www.philipsmall.co.uk/flash/food1.jpg' }} style={styles.cardImage} />
   						<View style={styles.cardDetails}>
   							<Text style={styles.cardTitle}>Food Name</Text>
-  							<Text style={styles.foodType}>A-LA-CARTE</Text>
+                <View style={styles.cardStar}>
+                  <Ionicons name='md-radio-button-on' color="green" size={20} />
+                  <Text style={[styles.foodType, { marginLeft: 5 }]}>A-LA-CARTE</Text>
+                </View>
   							<View style={styles.cardGenre}>
 										<Text style={styles.cardGenreItem}>
-                      <FontAwesome name="rupee" size={20} color="white" />
-                      <Text>158</Text>
+                      <FontAwesome name="rupee" size={20} color="orange" />
+                      <Text style={{ fontWeight: 'bold', fontSize: 15 }}>158</Text>
                     </Text>
   							</View>
   							<View style={styles.cardNumbers}>
-  								<View style={styles.cardStar}>
-                    <Text style={styles.cardGenreItem}>15 times ordered</Text>
-  									<Text style={styles.cardStarRatings}>Veg</Text>
-  								</View>
+
+                  <Text style={styles.cardGenreItem}>15 times ordered</Text>
+
 
   								<Text style={styles.cardRunningHours} />
   							</View>

@@ -5,6 +5,8 @@ import ForgotPassword from './src/screens/ForgotPassword';
 import HomePage from './src/screens/HomePage';
 import Food from './src/screens/Food';
 import FoodList from './src/screens/FoodList';
+import Cart from './src/screens/Cart';
+import Checkout from './src/screens/Checkout';
 
 export const MainRoutes =
   createStackNavigator({
@@ -40,5 +42,27 @@ export const MainRoutes =
     },
     foodList: {
       screen: FoodList
-    }
-  });
+    },
+    cart: {
+      screen: Cart,
+      navigationOptions: {
+        title: 'Cart'
+      }
+    },
+    checkout: {
+      screen: Checkout,
+      navigationOptions: {
+        title: 'Checkout'
+      }
+    },
+  }, {
+    headerStyle: {
+      backgroundColor: '#FDA400',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+  }
+
+);

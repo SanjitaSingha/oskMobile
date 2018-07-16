@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions, RefreshControl, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Dimensions, RefreshControl, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import { LinearGradient } from 'expo';
@@ -81,15 +81,27 @@ class HomePage extends Component {
             buttonColor="red"
           >
             <View style={[{ backgroundColor: '#BADA55' }, this.state.size]}>
+              <Image source={{ uri: 'https://drop.ndtv.com/albums/COOKS/chicken-dinner/chickendinner_640x480.jpg'}} style={{ height: 248, backgroundColor: 'black' }}/>
+
               <LinearGradient
                 colors={['rgba(0, 0, 0, 0.5)', 'rgba(0,0,0, 0.7)', 'rgba(0,0,0, 0.8)']}
                 style={styles.linearGradient}
-              >
-                <Text>1</Text>
-              </LinearGradient>
+              />
             </View>
-            <View style={[{ backgroundColor: 'red' }, this.state.size]}><Text>2</Text></View>
-            <View style={[{ backgroundColor: 'blue' }, this.state.size]}><Text>3</Text></View>
+            <View style={[{ backgroundColor: '#BADA55' }, this.state.size]}>
+              <Image source={{ uri: 'http://www.philipsmall.co.uk/flash/food1.jpg'}} style={{ height: 248, backgroundColor: 'black' }}/>
+              <LinearGradient
+                colors={['rgba(0, 0, 0, 0.5)', 'rgba(0,0,0, 0.7)', 'rgba(0,0,0, 0.8)']}
+                style={styles.linearGradient}
+              />
+            </View>
+            <View style={[{ backgroundColor: '#BADA55' }, this.state.size]}>
+              <Image source={{ uri: 'https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg'}} style={{ height: 248, backgroundColor: 'black' }}/>
+              <LinearGradient
+                colors={['rgba(0, 0, 0, 0.5)', 'rgba(0,0,0, 0.7)', 'rgba(0,0,0, 0.8)']}
+                style={styles.linearGradient}
+              />
+            </View>
           </Swiper>
           <View>
   					<View style={styles.listHeading}>
@@ -109,7 +121,27 @@ class HomePage extends Component {
   					</ScrollView>
 
   				</View>
-          <View>
+
+          <Swiper
+            autoplay
+            autoplayTimeout={4}
+            showsPagination={false}
+            height={248}
+            buttonColor="red"
+            style={{ marginTop: 15 }}
+          >
+            <View style={[{ backgroundColor: '#BADA55' }, this.state.size]}>
+              <LinearGradient
+                colors={['rgba(0, 0, 0, 0.5)', 'rgba(0,0,0, 0.7)', 'rgba(0,0,0, 0.8)']}
+                style={styles.linearGradient}
+              >
+                <Text>1</Text>
+              </LinearGradient>
+            </View>
+            <View style={[{ backgroundColor: 'red' }, this.state.size]}><Text>2</Text></View>
+          </Swiper>
+
+          <View style={{ marginBottom: 15 }}>
   					<View style={styles.listHeading}>
   						<Text style={styles.listHeadingLeft}>All Foods</Text>
   						<TouchableOpacity onPress={() => this.props.navigation.navigate('foodList')}>
@@ -125,7 +157,6 @@ class HomePage extends Component {
   							<SingleFoodCard key={info.id} info={info} viewFood={this.viewFood} />
   						))}
   					</ScrollView>
-
   				</View>
         </ScrollView>
       </View>

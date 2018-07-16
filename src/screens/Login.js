@@ -39,7 +39,7 @@ class Login extends Component {
               <TextInput style={styles.textInput}
                 placeholder={'Phone Number'}
                 underlineColorAndroid='transparent'
-                inlineImageLeft='search_icon'
+                keyboardType={'numeric'}
               />
             </View>
             <View style={[styles.inputContainer, { borderTopWidth: 1 }]}>

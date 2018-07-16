@@ -47,7 +47,7 @@ class Register extends Component {
               <TextInput style={styles.textInput}
                 placeholder={'Phone Number'}
                 underlineColorAndroid='transparent'
-                inlineImageLeft='search_icon'
+                keyboardType={'phone-pad'}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -56,7 +56,7 @@ class Register extends Component {
               <TextInput style={styles.textInput}
                 placeholder={'Email Address'}
                 underlineColorAndroid='transparent'
-                inlineImageLeft='search_icon'
+                keyboardType={'email-address'}
               />
             </View>
             <View style={[styles.inputContainer]}>

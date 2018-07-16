@@ -4,7 +4,7 @@ import { View, Text, ScrollView, FlatList, Dimensions,
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import { LinearGradient } from 'expo';
-import styles from '../styles/Food';
+import styles from '../styles/FoodList';
 import SingleFoodCard from '../components/SingleFoodCard';
 
 
@@ -14,31 +14,41 @@ const nonVeg = [
     id: 0,
     title: 'Chicken Kera Special',
     image: 'http://www.philipsmall.co.uk/flash/food1.jpg',
-    description: 'The famous north Indian Chicken fodd Item'
+    description: 'The famous north Indian Chicken fodd Item',
+    veg: true,
+    foodType: 'A-LA-CARTE'
   },
   {
     id: 1,
     title: 'Chicken Kera Special',
     image: 'https://cdnimg.webstaurantstore.com/images/products/large/77391/480506.jpg',
-    description: 'The famous north Indian Chicken fodd Item'
+    description: 'The famous north Indian Chicken fodd Item',
+    veg: false,
+    foodType: 'MEAL'
   },
   {
     id: 2,
     title: 'Chicken Kera Special',
     image: 'http://www.philipsmall.co.uk/flash/food1.jpg',
-    description: 'The famous north Indian Chicken fodd Item'
+    description: 'The famous north Indian Chicken fodd Item',
+    veg: true,
+    foodType: 'A-LA-CARTE'
   },
   {
     id: 3,
     title: 'Chicken Kera Special',
     image: 'http://www.philipsmall.co.uk/flash/food1.jpg',
-    description: 'The famous north Indian Chicken fodd Item'
+    description: 'The famous north Indian Chicken fodd Item',
+    veg: false,
+    foodType: 'MEAL'
   },
   {
     id: 4,
     title: 'Chicken Kera Special',
     image: 'http://www.philipsmall.co.uk/flash/food1.jpg',
-    description: 'The famous north Indian Chicken fodd Item'
+    description: 'The famous north Indian Chicken fodd Item',
+    veg: true,
+    foodType: 'A-LA-CARTE'
   },
 ];
 class FoodList extends Component {
@@ -72,9 +82,12 @@ class FoodList extends Component {
   }
   renderHeader = () => {
     return (
-      <View>
+      <View style={styles.searchBarContainer}>
         <TextInput
-          placeholder='Type your favourite food..'
+          underlineColorAndroid='transparent'
+          placeholder='Search your favourite food..'
+          returnKeyType='search' 
+          style={{ backgroundColor: 'white', padding: 5, width: '100%' }}
         />
       </View>
     );
@@ -86,6 +99,8 @@ class FoodList extends Component {
         <FlatList
           onLayout={this._onLayoutDidChange}
           style={styles.container}
+          ListHeaderComponent={this.renderHeader}
+          stickyHeaderIndices={[0]}
           refreshControl={
           <RefreshControl
             refreshing={false}
@@ -98,9 +113,18 @@ class FoodList extends Component {
           />}
           data={this.state.data}
           renderItem={({ item }) => (
-            <View style={{ marginVertical: 10 }}>
-              <Text style={{ color: 'white' }}>{item.description}</Text>
-            </View>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('food')} activeOpacity={0.8} style={styles.foodListCard}>
+              <Image
+                source={{ uri: item.image }}
+                style={styles.cardImage}
+              />
+              <Text style={[styles.foodName, { marginVertical: 5 }]}>{item.title}</Text>
+              <Text numberOfLines={1} style={{ color: '#fff' }}>{item.description}</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <Ionicons name='md-radio-button-on' color={item.veg ? "green" : 'red'} size={20} />
+                <Text style={{ color: '#fff', marginLeft: 5 }}>{item.foodType}</Text>
+              </View>
+            </TouchableOpacity>
           )}
 
           ListHeaderComponent={this.renderHeader}
