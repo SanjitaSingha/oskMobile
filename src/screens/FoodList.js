@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, FlatList, Dimensions,
   RefreshControl, TouchableOpacity, Image, TextInput } from 'react-native';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { Ionicons, FontAwesome, EvilIcons } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import { LinearGradient } from 'expo';
 import styles from '../styles/FoodList';
@@ -83,12 +83,16 @@ class FoodList extends Component {
   renderHeader = () => {
     return (
       <View style={styles.searchBarContainer}>
-        <TextInput
-          underlineColorAndroid='transparent'
-          placeholder='Search your favourite food..'
-          returnKeyType='search' 
-          style={{ backgroundColor: 'white', padding: 5, width: '100%' }}
-        />
+        <View style={{ backgroundColor: 'white', padding: 5, width: '100%', flexDirection: 'row' }}>
+          <EvilIcons name='search' size={30} color='black' />
+          <TextInput
+            onChangeText={(t) => this.setState({ search_text: t })}
+            underlineColorAndroid='transparent'
+            placeholder='Search your favourite food..'
+            returnKeyType='search'
+            style={{ width: '100%' }}
+          />
+        </View>
       </View>
     );
   };

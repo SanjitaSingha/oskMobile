@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions, RefreshControl, TouchableOpacity, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, EvilIcons, FontAwesome, Feather } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import { LinearGradient } from 'expo';
 import styles from '../styles/HomePage';
@@ -41,6 +41,35 @@ const nonVeg = [
   },
 ];
 class HomePage extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Home',
+      headerRight: (
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableOpacity style={{ marginRight: 7 }} onPress={() => navigation.navigate('myProfile')}>
+            <Feather name='user' size={30} color='white' />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('cart')}
+          >
+          <View
+            style={{ marginRight: 15, flexDirection: 'row' }}>
+            <Feather name="shopping-cart" size={25} color="white" />
+            <Text style={{ marginLeft: -4,  fontWeight: 'bold', marginTop: -4 }}>2</Text>
+          </View>
+          </TouchableOpacity>
+        </View>
+      ),
+      headerStyle: {
+        backgroundColor: '#FDA400',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    };
+
+  };
   constructor(props) {
     super(props);
 

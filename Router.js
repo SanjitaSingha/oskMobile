@@ -7,11 +7,19 @@ import Food from './src/screens/Food';
 import FoodList from './src/screens/FoodList';
 import Cart from './src/screens/Cart';
 import Checkout from './src/screens/Checkout';
+import MyProfile from './src/screens/MyProfile';
+import LocationList from './src/screens/LocationList';
 
 export const MainRoutes =
   createStackNavigator({
     login: {
       screen: Login,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    locationList: {
+      screen: LocationList,
       navigationOptions: {
         header: null,
       },
@@ -31,7 +39,8 @@ export const MainRoutes =
     home: {
       screen: HomePage,
       navigationOptions: {
-        title: 'Home'
+        title: 'Home',
+        headerLeft: null
       }
     },
     food: {
@@ -55,6 +64,13 @@ export const MainRoutes =
         title: 'Checkout'
       }
     },
+    myProfile: {
+      screen: MyProfile,
+      navigationOptions: {
+        title: 'My Profile'
+      }
+    },
+
   }, {
     headerStyle: {
       backgroundColor: '#FDA400',

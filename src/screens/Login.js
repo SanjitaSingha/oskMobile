@@ -58,7 +58,7 @@ class Login extends Component {
               <Text style={{ color: '#fff' }}>Forgot Password?</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('home') }
+              onPress={() => this.props.navigation.navigate('locationList') }
               activeOpacity={0.7} style={[styles.fullWidthButton, styles.yellowBackground]}>
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>

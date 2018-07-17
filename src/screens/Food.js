@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions, RefreshControl, TouchableOpacity, Image } from 'react-native';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { Ionicons, FontAwesome, Feather } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import { LinearGradient } from 'expo';
 import styles from '../styles/Food';
@@ -50,7 +50,7 @@ class Food extends Component {
         >
         <View
           style={{ marginRight: 15, flexDirection: 'row' }}>
-          <FontAwesome name="shopping-cart" size={25} color="white" />
+          <Feather name="shopping-cart" size={25} color="white" />
           <Text style={{ marginLeft: -4,  fontWeight: 'bold', marginTop: -4 }}>2</Text>
         </View>
         </TouchableOpacity>
