@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, Dimensions, RefreshControl } from 'react-native';
 import styles from '../styles/Cart';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { Ionicons, FontAwesome, Feather } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('window');
 const cartItem = [
@@ -19,6 +19,20 @@ const cartItem = [
       quantity: 1,
       price: 90
     },
+    // {
+    //   id: 3,
+    //   img: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/portion_sizes_slideshow/getty_rm_photo_of_fish_meal_on_small_plate.jpg' ,
+    //   foodName: 'Paneer Masala',
+    //   quantity: 1,
+    //   price: 90
+    // },
+    // {
+    //   id: 4,
+    //   img: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/portion_sizes_slideshow/getty_rm_photo_of_fish_meal_on_small_plate.jpg' ,
+    //   foodName: 'Paneer Masala',
+    //   quantity: 1,
+    //   price: 90
+    // },
     {
       id: 2,
       img: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/portion_sizes_slideshow/getty_rm_photo_of_fish_meal_on_small_plate.jpg' ,
@@ -32,7 +46,6 @@ class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cartItemLength: 1,
       size: { width, height },
       cartItem: cartItem,
       quantity: 1,
@@ -42,38 +55,51 @@ class Cart extends Component {
 
   renderHeader = () => {
     return (
-      <View style={[styles.cartHeader, { width: '100%' }]}>
-        <View style={{ flex: 1, alignItems: 'center', borderRightWidth: 1, borderColor: '#ccc' }}>
-          <Text style={{ color: 'white', fontSize: 12 }}>SUB TOTAL</Text>
-          <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold' }}>
+      <View style={[styles.cartHeader, { width: '100%', paddingHorizontal: 50 }]}>
+        <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Text style={{ color: 'white', fontSize: 15 }}>SUB TOTAL</Text>
+          <Text style={{ color: 'white', fontSize: 17, fontWeight: 'bold' }}>
             Rs. <Text>{total}</Text>
           </Text>
         </View>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('checkout')}
+        {/*<TouchableOpacity
+          onPress={() => this.props.navigation.navigate('checkout', { subTotal: total })}
           style={{ flex: 1, alignItems: 'center' }}>
           <Text style={{ color: 'white', fontWeight: 'bold' }}>CHECKOUT</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>*/}
       </View>
     )
   }
 
+  removeItemCart(id) {
+    const finalCart = this.state.cartItem.filter(d => {
+      return d.id !== id;
+    });
+    this.setState({ cartItem: finalCart });
+  }
+
   isEmptyMessageRender() {
-    console.log('Cart Lits', this.state.cartItemLength);
-    if(this.state.cartItemLength === 0) {
+    if(this.state.cartItem.length === 0) {
       return (
-        <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: -70 }}>
           <Image source={require('../constants/images/empty-cart.png')} style={{ width: 200, height: 150 }}/>
           <Text>Please add Items</Text>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('home')}>
-            <Text>shop more</Text>
+          <TouchableOpacity style={{ marginTop: 10 }} onPress={() => this.props.navigation.navigate('home')}>
+            <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Shop More</Text>
           </TouchableOpacity>
         </View>
       )
     } else {
       return (
-        <View>
+        <View style={{ position: 'relative', flex: 1 }}>
           {this.renderCartList()}
+          <TouchableOpacity
+            style={styles.checkoutButton}
+            onPress={() => this.props.navigation.navigate('checkout', { subTotal: total })}
+          >
+            <Text style={{ marginRight: 5 }}>Checkout</Text>
+            <Feather name='check-square' size={20} color='black' />
+          </TouchableOpacity>
         </View>
       )
     }
@@ -174,7 +200,7 @@ class Cart extends Component {
                       <FontAwesome name="rupee" size={20} color="black" />
                       {item.quantity * item.price}
                     </Text>
-                    <TouchableOpacity style={styles.removeButton}>
+                    <TouchableOpacity onPress={() => this.removeItemCart(item.id)} style={styles.removeButton}>
                       <Text>Remove</Text>
                     </TouchableOpacity>
                   </View>
@@ -204,7 +230,7 @@ class Cart extends Component {
   render() {
     this.calCulate();
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         {this.isEmptyMessageRender()}
       </View>
     )

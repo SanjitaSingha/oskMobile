@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: '#131313',
     padding: 7,
-    elevation: 2
+    elevation: 2,
+    alignItems: 'center'
   },
   inputField: {
     height: 40,

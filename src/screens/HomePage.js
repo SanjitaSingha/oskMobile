@@ -113,21 +113,21 @@ class HomePage extends Component {
               <Image source={{ uri: 'https://drop.ndtv.com/albums/COOKS/chicken-dinner/chickendinner_640x480.jpg'}} style={{ height: 248, backgroundColor: 'black' }}/>
 
               <LinearGradient
-                colors={['rgba(0, 0, 0, 0.5)', 'rgba(0,0,0, 0.7)', 'rgba(0,0,0, 0.8)']}
+                colors={['rgba(0, 0, 0, 0.3)', 'rgba(0,0,0, 0.5)', 'rgba(0,0,0, 0.7)']}
                 style={styles.linearGradient}
               />
             </View>
             <View style={[{ backgroundColor: '#BADA55' }, this.state.size]}>
               <Image source={{ uri: 'http://www.philipsmall.co.uk/flash/food1.jpg'}} style={{ height: 248, backgroundColor: 'black' }}/>
               <LinearGradient
-                colors={['rgba(0, 0, 0, 0.5)', 'rgba(0,0,0, 0.7)', 'rgba(0,0,0, 0.8)']}
+                colors={['rgba(0, 0, 0, 0.3)', 'rgba(0,0,0, 0.5)', 'rgba(0,0,0, 0.7)']}
                 style={styles.linearGradient}
               />
             </View>
             <View style={[{ backgroundColor: '#BADA55' }, this.state.size]}>
               <Image source={{ uri: 'https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg'}} style={{ height: 248, backgroundColor: 'black' }}/>
               <LinearGradient
-                colors={['rgba(0, 0, 0, 0.5)', 'rgba(0,0,0, 0.7)', 'rgba(0,0,0, 0.8)']}
+                colors={['rgba(0, 0, 0, 0.3)', 'rgba(0,0,0, 0.5)', 'rgba(0,0,0, 0.7)']}
                 style={styles.linearGradient}
               />
             </View>
@@ -161,7 +161,7 @@ class HomePage extends Component {
           >
             <View style={[{ backgroundColor: '#BADA55' }, this.state.size]}>
               <LinearGradient
-                colors={['rgba(0, 0, 0, 0.5)', 'rgba(0,0,0, 0.7)', 'rgba(0,0,0, 0.8)']}
+                colors={['rgba(0, 0, 0, 0.3)', 'rgba(0,0,0, 0.5)', 'rgba(0,0,0, 0.7)']}
                 style={styles.linearGradient}
               >
                 <Text>1</Text>

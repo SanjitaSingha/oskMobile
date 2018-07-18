@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   buttonText: {
-    color: '#fff'
+    color: '#fff',
+		fontWeight: 'bold'
   },
 
   yellowBackground: {

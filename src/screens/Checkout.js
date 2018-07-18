@@ -6,16 +6,22 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo';
 import styles from '../styles/Checkout';
 
-
+const fakeId = 2;
 const { width, height } = Dimensions.get('window');
 const oldAddressList = [
   {
+    id: 0,
     name: 'Sanjita Singha',
-    address: 'House no.-14,Bylane- 14 Jatia, ghy '
+    address: 'House no.-14,Bylane- 14 Jatia, ghy',
+    landmark: 'Agradudh',
+    pinCode: '78456'
   },
   {
+    id: 1,
     name: 'Sanjita Singha',
-    address: 'House no.-14,Bylane- 14 Jatia, ghy '
+    address: 'House no.-24,Bylane- 14 Jatia, ghy',
+    landmark: 'Agradudh',
+    pinCode: '78454'
   }
 ];
 class Checkout extends Component {
@@ -27,13 +33,55 @@ class Checkout extends Component {
       address: true,
       oldAddressList: oldAddressList,
       cod: true,
-      continueDisabled: true
+      continueDisabled: true,
+      toEditAddress: {},
+      edit: false,
     };
 
   }
   _onLayoutDidChange = (e) => {
    const layout = e.nativeEvent.layout;
    this.setState({ size: { width: layout.width, height: layout.height } });
+  }
+
+  saveOrEditAddress() {
+    if(this.state.edit) {
+      const data1 = {};
+      data1.id = this.state.newData.id;
+      data1.name = this.state.name;
+      data1.address = this.state.addressLine;
+      data1.landmark = this.state.landmark;
+      data1.pinCode = this.state.pinCode;
+      this.setState({ toEditAddress: data1 }, function() {
+        console.log(this.state.toEditAddress, this.state.toEditAddress.length);
+
+          const toEdit = this.state.oldAddressList.filter(d => {
+            return this.state.toEditAddress.id === d.id
+          });
+          const tooEdit = this.state.oldAddressList.map(d => {
+            if(this.state.toEditAddress.id === d.id) {
+              return d = this.state.toEditAddress;
+            }
+            return d;
+          });
+          // console.log('To be edit Address', tooEdit);
+          this.setState({ oldAddressList: tooEdit, address: true });
+        })
+      }
+      else {
+        // to add Address
+        fakeId++;
+        const obj = {};
+        obj.id = fakeId;
+        obj.name = this.state.name;
+        obj.address = this.state.addressLine;
+        obj.landmark = this.state.landmark;
+        obj.pinCode = this.state.pinCode;
+        this.state.oldAddressList.push(obj);
+        // console.log('Add Address', obj, this.state.oldAddressList);
+        this.setState({ oldAddressList: this.state.oldAddressList, address: true });
+
+      }
   }
 
   renderNewAddressForm() {
@@ -48,44 +96,55 @@ class Checkout extends Component {
         <View>
           <Text>Name</Text>
           <TextInput
+            onChangeText={(t) => this.setState({ name: t })}
             underlineColorAndroid='transparent'
             placeholder={'Enter Name'}
+            value={this.state.name}
             style={[styles.inputField, { marginTop: 5 }]}
           />
         </View>
         <View>
           <Text>Contact Number</Text>
           <TextInput
+            onChangeText={(t) => this.setState({ contactNumber: t })}
             underlineColorAndroid='transparent'
             placeholder={'Enter contact Number'}
+            value={this.state.contactNumber}
             style={[styles.inputField, { marginTop: 5 }]}
           />
         </View>
         <View>
           <Text>Address Line 1</Text>
           <TextInput
+            onChangeText={(t) => this.setState({ addressLine: t })}
             underlineColorAndroid='transparent'
             placeholder={'Enter Address'}
+            value={this.state.addressLine}
             style={[styles.inputField, { marginTop: 5 }]}
           />
         </View>
         <View>
           <Text>Landmark</Text>
           <TextInput
+            onChangeText={(t) => this.setState({ landmark: t })}
             underlineColorAndroid='transparent'
             placeholder={'Enter Landmark'}
+            value={this.state.landmark}
             style={[styles.inputField, { marginTop: 5 }]}
           />
         </View>
         <View>
           <Text>Pincode</Text>
           <TextInput
+            onChangeText={(t) => this.setState({ pinCode: t })}
             underlineColorAndroid='transparent'
             placeholder={'Enter Pincode'}
+            value={this.state.pinCode}
+            keyboardType={'numeric'}
             style={[styles.inputField, { marginTop: 5 }]}
           />
         </View>
-        <TouchableOpacity style={styles.saveButton}>
+        <TouchableOpacity style={styles.saveButton} onPress={() => this.saveOrEditAddress()}>
           <Text>SAVE</Text>
         </TouchableOpacity>
       </View>
@@ -107,20 +166,37 @@ class Checkout extends Component {
     )
   }
 
-  renderEditButton(i) {
+  editAddress(data) {
+    this.setState({ edit: true, address: false, newData: data,
+      name: data.name, addressLine: data.address,
+      landmark: data.landmark, pinCode: data.pinCode });
+  }
+  removeAddress(data) {
+    const a = this.state.oldAddressList.filter(d => {
+      return d.id !== data.id;
+    });
+    this.setState({ oldAddressList: a });
+  }
+
+  renderEditButton(i, data) {
     if(i === this.state.addressSelected) {
       return (
         <View style={{ marginTop: 7, borderColor: '#FDA400', borderTopWidth: 0.5, paddingTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <TouchableOpacity style={{ flex: 1, borderRightWidth: 1, borderColor: '#FDA400', justifyContent: 'center', alignItems: 'center' }}>
+          <TouchableOpacity
+            onPress={() => this.editAddress(data)}
+            style={{ flex: 1, borderRightWidth: 1, borderColor: '#FDA400', justifyContent: 'center', alignItems: 'center' }}
+          >
             <Text>EDIT</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <TouchableOpacity
+            onPress={() => this.removeAddress(data)}
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+          >
             <Text>REMOVE</Text>
           </TouchableOpacity>
         </View>
       );
     }
-
   }
 
   renderAddressList() {
@@ -132,10 +208,12 @@ class Checkout extends Component {
           <Text style={[styles.checkoutHeader]}>
             {d.name}
           </Text>
-          <Text noOfLines={1}>
-            {d.address}
+          <Text numberOfLines={1}>
+            <Text>{d.address}</Text>
+            <Text> {d.landmark}</Text>
+            <Text> {d.pinCode}</Text>
           </Text>
-          {this.renderEditButton(i)}
+          {this.renderEditButton(i, d)}
         </TouchableOpacity>
       )
     })
@@ -144,7 +222,14 @@ class Checkout extends Component {
   renderAddAddressOrAddressForm() {
     if(this.state.address) {
       return (
-        <TouchableOpacity onPress={() => this.setState({ address: false })}>
+        <TouchableOpacity
+          onPress={() => this.setState({
+            toEditAddress: {},
+            edit: false,
+            name: '', contactNumber: '', landmark: '',
+            pinCode: '', addressLine: '', address: false
+          })}
+        >
           <Text>+ Add new Address</Text>
         </TouchableOpacity>
       )
@@ -189,7 +274,7 @@ class Checkout extends Component {
               <Text style={styles.checkoutHeader}>Order Details</Text>
               <View style={styles.orderDetailsInner}>
                 <Text style={styles.orderSummaryText}>Sub Total: </Text>
-                <Text style={[styles.orderSummaryText, { fontWeight: 'bold' }]}>Rs. 450</Text>
+                <Text style={[styles.orderSummaryText, { fontWeight: 'bold' }]}>Rs. {this.props.navigation.state.params.subTotal}</Text>
               </View>
               <View style={styles.orderDetailsInner}>
                 <Text style={[styles.orderSummaryText]}>Wallet Points: </Text>
@@ -201,7 +286,7 @@ class Checkout extends Component {
               </View>
               <View style={[styles.orderDetailsInner, { borderBottomWidth: 0 }]}>
                 <Text style={[styles.orderSummaryText]}>Payable Amount:</Text>
-                 <Text style={[styles.orderSummaryText, { fontWeight: 'bold' }]}>Rs. 20.00</Text>
+                 <Text style={[styles.orderSummaryText, { fontWeight: 'bold' }]}>Rs. {(this.props.navigation.state.params.subTotal + 20) - 0.00}</Text>
               </View>
             </View>
           </View>

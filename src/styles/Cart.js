@@ -10,10 +10,10 @@ const styles = StyleSheet.create({
   cartHeader: {
     height: 40,
     paddingVertical: 10,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     backgroundColor: 'black',
-    alignItems: 'center',
-    justifyContent: 'center'
+    // alignItems: 'center',
+    // justifyContent: 'center'
   },
   cartCard: {
     marginHorizontal: 10,
@@ -57,7 +57,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 3,
     marginTop: 10
-  }
+  },
+	checkoutButton: {
+		backgroundColor: '#FDA400',
+		width: 120,
+		height: 40,
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: 3,
+		flexDirection: 'row',
+		position: 'absolute',
+		bottom: 30,
+		right: 30,
+		elevation: 5
+	}
 });
 
 export default styles;

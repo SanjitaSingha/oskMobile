@@ -107,6 +107,36 @@ class MyProfile extends Component {
             />
 
           </View>
+
+          <View style={{ borderTopWidth: 0.5, borderColor: '#ccc', paddingTop: 10, marginTop: 15 }}>
+            <Text style={[styles.textStyle, { fontWeight: 'bold', marginBottom: 10 }]}>Address</Text>
+            <View style={styles.detailsContainer}>
+              <Text style={[styles.textStyle, { fontWeight: 'bold', flex: 1 }]}>Address Line1:</Text>
+              <TextInput
+                underlineColorAndroid='transparent'
+                onChangeText={(t) => this.setState({ address: t })}
+                style={[styles.textStyle, { flex: 2, marginLeft: 10 }]} value={this.state.address}
+              />
+            </View>
+            <View style={styles.detailsContainer}>
+              <Text style={[styles.textStyle, { fontWeight: 'bold', flex: 1 }]}>Landmark:</Text>
+              <TextInput
+                underlineColorAndroid='transparent'
+                onChangeText={(t) => this.setState({ landmark: t })}
+                style={[styles.textStyle, { flex: 2, marginLeft: 10 }]} value={this.state.landmark}
+              />
+            </View>
+            <View style={styles.detailsContainer}>
+              <Text style={[styles.textStyle, { fontWeight: 'bold', flex: 1 }]}>Pin Code:</Text>
+              <TextInput
+                underlineColorAndroid='transparent'
+                onChangeText={(t) => this.setState({ pincode: t })}
+                style={[styles.textStyle, { flex: 2, marginLeft: 10 }]} value={this.state.pincode}
+                keyboardType={'numeric'}
+              />
+            </View>
+          </View>
+
           <View style={{ borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor: '#ccc', paddingVertical: 10, marginTop: 15 }}>
             <Text style={[styles.textStyle, { fontWeight: 'bold' }]}>Wallet</Text>
             <View style={[styles.detailsContainer, { marginTop: 10 }]}>
