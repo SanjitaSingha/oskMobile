@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions, RefreshControl,
   TextInput,
   TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Feather, FontAwesome } from '@expo/vector-icons';
 import { LinearGradient } from 'expo';
 import styles from '../styles/Checkout';
 
@@ -181,10 +181,10 @@ class Checkout extends Component {
   renderEditButton(i, data) {
     if(i === this.state.addressSelected) {
       return (
-        <View style={{ marginTop: 7, borderColor: '#FDA400', borderTopWidth: 0.5, paddingTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <View style={{ marginTop: 7, borderColor: '#01b20d', borderTopWidth: 0.8, paddingTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <TouchableOpacity
             onPress={() => this.editAddress(data)}
-            style={{ flex: 1, borderRightWidth: 1, borderColor: '#FDA400', justifyContent: 'center', alignItems: 'center' }}
+            style={{ flex: 1, borderRightWidth: 1.5, borderColor: '#01b20d', justifyContent: 'center', alignItems: 'center' }}
           >
             <Text>EDIT</Text>
           </TouchableOpacity>
@@ -202,19 +202,25 @@ class Checkout extends Component {
   renderAddressList() {
     return this.state.oldAddressList.map((d, i) => {
       return (
-        <TouchableOpacity
-          onPress={() => this.setState({ addressSelected: i, continueDisabled: false })}
-          style={[styles.addressListSection,  { padding: 5, borderColor: '#FDA400', borderWidth: i === this.state.addressSelected ? 0.5 : 0 }]}>
-          <Text style={[styles.checkoutHeader]}>
-            {d.name}
-          </Text>
-          <Text numberOfLines={1}>
-            <Text>{d.address}</Text>
-            <Text> {d.landmark}</Text>
-            <Text> {d.pinCode}</Text>
-          </Text>
-          {this.renderEditButton(i, d)}
-        </TouchableOpacity>
+        <View style={{ position: 'relative' }}>
+
+          <FontAwesome name='check-circle' size={20} color='#01b20d'
+            style={{ opacity: i === this.state.addressSelected ? 1 : 0, backgroundColor: 'white', position: 'absolute', top: -10, right: -5, zIndex: 100 }}/>
+
+          <TouchableOpacity
+            onPress={() => this.setState({ addressSelected: i, continueDisabled: false })}
+            style={[styles.addressListSection, { zIndex: -100, padding: 5, borderColor: '#01b20d', borderWidth: i === this.state.addressSelected ? 0.8 : 0 }]}>
+            <Text style={[styles.checkoutHeader]}>
+              {d.name}
+            </Text>
+            <Text numberOfLines={1}>
+              <Text>{d.address}</Text>
+              <Text> {d.landmark}</Text>
+              <Text> {d.pinCode}</Text>
+            </Text>
+            {this.renderEditButton(i, d)}
+          </TouchableOpacity>
+        </View>
       )
     })
   }
@@ -270,7 +276,7 @@ class Checkout extends Component {
         >
         <View>
           <View>
-            <View style={styles.checkoutCard}>
+            <View style={[styles.checkoutCard, { paddingBottom: 5 }]}>
               <Text style={styles.checkoutHeader}>Order Details</Text>
               <View style={styles.orderDetailsInner}>
                 <Text style={styles.orderSummaryText}>Sub Total: </Text>
@@ -311,11 +317,11 @@ class Checkout extends Component {
           <View style={styles.checkoutCard}>
             <Text style={[styles.checkoutHeader, { marginBottom: 5 }]}>Choose Billing Mode</Text>
             <View>
-              <TouchableOpacity onPress={() => this.setState({ cod: true })} style={{ padding: 5, backgroundColor: this.state.cod ? 'black' : 'white' }}>
-                <Text style={{ color: this.state.cod ? 'white' : 'black' }}>Cash on Delivery</Text>
+              <TouchableOpacity onPress={() => this.setState({ cod: true })} style={{ paddingHorizontal: 5, paddingVertical: 10, backgroundColor: this.state.cod ? 'black' : 'white' }}>
+                <Text style={{ color: this.state.cod ? 'white' : 'black', fontWeight: 'bold' }}>Cash on Delivery</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => this.setState({ cod: false })} style={{ padding: 5, backgroundColor: !this.state.cod ? 'black' : 'white' }}>
-                <Text style={{ color: !this.state.cod ? 'white' : 'black' }}>Online Payment</Text>
+              <TouchableOpacity onPress={() => this.setState({ cod: false })} style={{ paddingHorizontal: 5, paddingVertical: 10, backgroundColor: !this.state.cod ? 'black' : 'white' }}>
+                <Text style={{ color: !this.state.cod ? 'white' : 'black', fontWeight: 'bold' }}>Online Payment</Text>
               </TouchableOpacity>
             </View>
           </View>

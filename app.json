@@ -1,5 +1,14 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
-  }
+    "name": "OSK",
+    "version": "0.1.0",
+    "slug": "One-Stop-Kitchen",
+    "icon": "./src/constants/images/logoBackTrans.png",
+    "sdkVersion": "27.0.0",
+    "privacy": "public",
+    "android": {
+      "package": "com.oskMobile"
+    }
+  },
+
 }

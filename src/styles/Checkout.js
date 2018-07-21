@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#DBDCE0'
+    // backgroundColor: '#DBDCE0',
+    backgroundColor: '#e8e8ea'
   },
   checkoutHeader: {
     fontSize: 15,
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: 0.5,
     borderColor: '#DBDCE0',
-    height: 30,
+    height: 40,
     alignItems: 'center'
   },
   orderSummaryText: {
