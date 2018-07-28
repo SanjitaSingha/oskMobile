@@ -3,7 +3,7 @@ import { Platform, StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     // alignItems: 'center',
 		backgroundColor: 'rgba(0,0,0,.5)',
     padding: 15,
@@ -59,6 +59,11 @@ const styles = StyleSheet.create({
 	seperator: {
 		marginTop: 10,
 		backgroundColor: '#8E8E8E'
+	},
+	logoStyle: {
+		width: 110,
+		height: 110,
+		marginTop: 120
 	}
 });
 

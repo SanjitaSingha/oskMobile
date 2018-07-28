@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions, RefreshControl,
   TextInput,
-  TouchableOpacity } from 'react-native';
+  TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { Ionicons, Feather, FontAwesome } from '@expo/vector-icons';
 import { LinearGradient } from 'expo';
 import styles from '../styles/Checkout';
@@ -86,68 +86,70 @@ class Checkout extends Component {
 
   renderNewAddressForm() {
     return (
-      <View style={{ borderTopWidth: 0.5, borderColor: '#FDA400', paddingTop: 10, paddingHorizontal: 5 }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Text style={styles.checkoutHeader}>Please Fill Up delivery Address</Text>
-          <TouchableOpacity onPress={() => this.setState({ address: true })}>
-            <Ionicons name='ios-close-circle' size={30} color='#FDA400' />
+      <KeyboardAvoidingView behavior='padding'>
+        <View style={{ borderTopWidth: 0.5, borderColor: '#FDA400', paddingTop: 10, paddingHorizontal: 5 }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Text style={styles.checkoutHeader}>Please Fill Up delivery Address</Text>
+            <TouchableOpacity onPress={() => this.setState({ address: true })}>
+              <Ionicons name='ios-close-circle' size={30} color='#FDA400' />
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text>Name</Text>
+            <TextInput
+              onChangeText={(t) => this.setState({ name: t })}
+              underlineColorAndroid='transparent'
+              placeholder={'Enter Name'}
+              value={this.state.name}
+              style={[styles.inputField, { marginTop: 5 }]}
+            />
+          </View>
+          <View>
+            <Text>Contact Number</Text>
+            <TextInput
+              onChangeText={(t) => this.setState({ contactNumber: t })}
+              underlineColorAndroid='transparent'
+              placeholder={'Enter contact Number'}
+              value={this.state.contactNumber}
+              style={[styles.inputField, { marginTop: 5 }]}
+            />
+          </View>
+          <View>
+            <Text>Address Line 1</Text>
+            <TextInput
+              onChangeText={(t) => this.setState({ addressLine: t })}
+              underlineColorAndroid='transparent'
+              placeholder={'Enter Address'}
+              value={this.state.addressLine}
+              style={[styles.inputField, { marginTop: 5 }]}
+            />
+          </View>
+          <View>
+            <Text>Landmark</Text>
+            <TextInput
+              onChangeText={(t) => this.setState({ landmark: t })}
+              underlineColorAndroid='transparent'
+              placeholder={'Enter Landmark'}
+              value={this.state.landmark}
+              style={[styles.inputField, { marginTop: 5 }]}
+            />
+          </View>
+          <View>
+            <Text>Pincode</Text>
+            <TextInput
+              onChangeText={(t) => this.setState({ pinCode: t })}
+              underlineColorAndroid='transparent'
+              placeholder={'Enter Pincode'}
+              value={this.state.pinCode}
+              keyboardType={'numeric'}
+              style={[styles.inputField, { marginTop: 5 }]}
+            />
+          </View>
+          <TouchableOpacity style={styles.saveButton} onPress={() => this.saveOrEditAddress()}>
+            <Text>SAVE</Text>
           </TouchableOpacity>
         </View>
-        <View>
-          <Text>Name</Text>
-          <TextInput
-            onChangeText={(t) => this.setState({ name: t })}
-            underlineColorAndroid='transparent'
-            placeholder={'Enter Name'}
-            value={this.state.name}
-            style={[styles.inputField, { marginTop: 5 }]}
-          />
-        </View>
-        <View>
-          <Text>Contact Number</Text>
-          <TextInput
-            onChangeText={(t) => this.setState({ contactNumber: t })}
-            underlineColorAndroid='transparent'
-            placeholder={'Enter contact Number'}
-            value={this.state.contactNumber}
-            style={[styles.inputField, { marginTop: 5 }]}
-          />
-        </View>
-        <View>
-          <Text>Address Line 1</Text>
-          <TextInput
-            onChangeText={(t) => this.setState({ addressLine: t })}
-            underlineColorAndroid='transparent'
-            placeholder={'Enter Address'}
-            value={this.state.addressLine}
-            style={[styles.inputField, { marginTop: 5 }]}
-          />
-        </View>
-        <View>
-          <Text>Landmark</Text>
-          <TextInput
-            onChangeText={(t) => this.setState({ landmark: t })}
-            underlineColorAndroid='transparent'
-            placeholder={'Enter Landmark'}
-            value={this.state.landmark}
-            style={[styles.inputField, { marginTop: 5 }]}
-          />
-        </View>
-        <View>
-          <Text>Pincode</Text>
-          <TextInput
-            onChangeText={(t) => this.setState({ pinCode: t })}
-            underlineColorAndroid='transparent'
-            placeholder={'Enter Pincode'}
-            value={this.state.pinCode}
-            keyboardType={'numeric'}
-            style={[styles.inputField, { marginTop: 5 }]}
-          />
-        </View>
-        <TouchableOpacity style={styles.saveButton} onPress={() => this.saveOrEditAddress()}>
-          <Text>SAVE</Text>
-        </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 
@@ -263,6 +265,7 @@ class Checkout extends Component {
       <View style={{ flex: 1 }}>
         <ScrollView onLayout={this._onLayoutDidChange}
           style={styles.container}
+          keyboardShouldPersistTaps={'always'}
           refreshControl={
           <RefreshControl
             refreshing={false}
@@ -274,6 +277,7 @@ class Checkout extends Component {
             progressBackgroundColor="white"
           />}
         >
+
         <View>
           <View>
             <View style={[styles.checkoutCard, { paddingBottom: 5 }]}>
@@ -326,6 +330,7 @@ class Checkout extends Component {
             </View>
           </View>
         </View>
+
         </ScrollView>
         <TouchableOpacity disabled={this.state.continueDisabled} style={[styles.continueButton, { backgroundColor: this.state.continueDisabled ? '#fccb76' : '#FDA400' }]}>
           <Text style={[{ color: this.state.continueDisabled ? 'grey' : 'black' }]}>CONTINUE</Text>

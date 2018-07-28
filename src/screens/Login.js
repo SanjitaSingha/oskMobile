@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, Dimensions, ScrollView, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, ImageBackground, Dimensions, ScrollView, TextInput,
+   TouchableOpacity, Image, KeyboardAvoidingView, Keyboard, Animated } from 'react-native';
 import styles from '../styles/Login';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
@@ -15,15 +16,52 @@ class Login extends Component {
       width,
       height,
     };
+    this.logoStyle = new Animated.Value(120);
   }
+
+  componentDidMount() {
+    console.log('Component did mount');
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardHide);
+  }
+
+  componentWillUnmount() {
+    console.log('Component will mount');
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  keyboardHide = () => {
+    console.log('Keyboard hide');
+    Animated.timing(this.logoStyle, {
+      toValue: 120,
+      duration: 250
+    }).start();
+  }
+
+  keyboardShow = () => {
+    console.log('Keyboard Show');
+    Animated.timing(this.logoStyle, {
+      toValue: 10,
+      duration: 250
+    }).start();
+  }
+
   _onLayoutDidChange = (e) => {
    const layout = e.nativeEvent.layout;
    console.log('Layout', e, layout);
    this.setState({ width: layout.width, height: layout.height });
   }
   render() {
+    const logoStyle = [
+      styles.logoStyle,
+        { marginTop: this.logoStyle },
+
+    ];
     return (
-      <ScrollView onLayout={this._onLayoutDidChange}
+      <KeyboardAvoidingView>
+      <ScrollView
+        keyboardShouldPersistTaps={'always'}
       >
       <ImageBackground
         style={{ width: this.state.width, height: this.state.height <= 360 ? '100%': this.state.height }}
@@ -31,21 +69,25 @@ class Login extends Component {
         <View style={styles.container}>
           <View>
             <View style={{ alignItems: 'center', marginBottom: 15  }}>
-              <Image source={require('../constants/images/logoBackTrans.png')} style={{ width: 100, height: 100 }}/>
+              <Animated.Image resizeMode='contain' source={require('../constants/images/logoBackTrans.png')} style={logoStyle}/>
             </View>
             <View style={styles.inputContainer}>
               <FontAwesome name="phone" size={20} color="red" />
               <Text style={styles.loginLabel}>Username</Text>
               <TextInput style={styles.textInput}
+                ref={input => { this.focusUserName = input; }}
                 placeholder={'Phone Number'}
                 underlineColorAndroid='transparent'
                 keyboardType={'numeric'}
+                returnKeyType='next'
+                onSubmitEditing={() => this.focusPassword.focus()}
               />
             </View>
             <View style={[styles.inputContainer, { borderTopWidth: 1 }]}>
               <FontAwesome name="lock" size={20} color="red" />
               <Text style={styles.loginLabel}>Password</Text>
               <TextInput style={styles.textInput}
+                ref={input => { this.focusPassword = input; }}
                 placeholder={'Case Sensitive'}
                 underlineColorAndroid='transparent'
                 secureTextEntry
@@ -71,6 +113,7 @@ class Login extends Component {
         </View>
       </ImageBackground>
       </ScrollView>
+      </KeyboardAvoidingView>
     )
   }
 }

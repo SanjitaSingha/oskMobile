@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity, TextInput,
-  Dimensions, RefreshControl, Modal, Share } from 'react-native';
+  Dimensions, RefreshControl, Modal, Share, KeyboardAvoidingView } from 'react-native';
 import styles from '../styles/MyProfile';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
@@ -67,6 +67,7 @@ class MyProfile extends Component {
         <ScrollView
         onLayout={this._onLayoutDidChange}
         style={styles.container}
+        keyboardShouldPersistTaps={'always'}
         refreshControl={
         <RefreshControl
           refreshing={false}
@@ -78,6 +79,7 @@ class MyProfile extends Component {
           progressBackgroundColor="white"
         />}
         >
+        <KeyboardAvoidingView behavior='padding'>
         <View style={{ padding: 15 }}>
 
           <View style={styles.detailsContainer}>
@@ -164,7 +166,7 @@ class MyProfile extends Component {
             </TouchableOpacity>
           </View>
         </View>
-
+        </KeyboardAvoidingView>
         </ScrollView>
         <Modal
           animationType="slide"

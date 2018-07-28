@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, Dimensions , TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, ImageBackground, Dimensions , TextInput,
+   TouchableOpacity, Image, ScrollView, KeyboardAvoidingView } from 'react-native';
 import styles from '../styles/Login';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
@@ -23,72 +24,90 @@ class Register extends Component {
   render() {
     return (
       <ScrollView onLayout={this._onLayoutDidChange}
+        keyboardShouldPersistTaps={'always'}
       >
-      <ImageBackground
-        style={{ width: this.state.width, height: this.state.height <= 360 ? '100%': this.state.height }}
-        source={{ uri: remote }}>
-        <View style={styles.container}>
-          <View>
-            <View style={{ alignItems: 'center', marginBottom: 15  }}>
-              <Image source={require('../constants/images/logoBackTrans.png')} style={{ width: 100, height: 100 }}/>
-            </View>
-            <View style={styles.inputContainer}>
-              <FontAwesome name="user-circle" size={17} color="red" />
-              <Text style={styles.loginLabel}>Name</Text>
-              <TextInput style={styles.textInput}
-                placeholder={'Name'}
-                underlineColorAndroid='transparent'
-                inlineImageLeft='search_icon'
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <FontAwesome name="phone" size={20} color="red" />
-              <Text style={styles.loginLabel}>Username</Text>
-              <TextInput style={styles.textInput}
-                placeholder={'Phone Number'}
-                underlineColorAndroid='transparent'
-                keyboardType={'phone-pad'}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <FontAwesome name="envelope" size={17} color="red" />
-              <Text style={styles.loginLabel}>Email</Text>
-              <TextInput style={styles.textInput}
-                placeholder={'Email Address'}
-                underlineColorAndroid='transparent'
-                keyboardType={'email-address'}
-              />
-            </View>
-            <View style={[styles.inputContainer]}>
-              <FontAwesome name="lock" size={20} color="red" />
-              <Text style={styles.loginLabel}>Password</Text>
-              <TextInput style={styles.textInput}
-                placeholder={'Password'}
-                underlineColorAndroid='transparent'
-                secureTextEntry
+      <KeyboardAvoidingView behavior="padding">
 
-              />
-            </View>
-            <View style={[styles.inputContainer, { borderBottomWidth: 0 }]}>
-              <FontAwesome name="users" size={20} color="red" />
-              <Text style={styles.loginLabel}>Referral Code</Text>
-              <TextInput style={styles.textInput}
-                placeholder={'Referral Code'}
-                underlineColorAndroid='transparent'
-                secureTextEntry
+        <ImageBackground
+          style={{ width: this.state.width, height: this.state.height <= 360 ? '100%': this.state.height }}
+          source={{ uri: remote }}>
+          <View style={[styles.container, { justifyContent: 'center' }]}>
 
-              />
+            <View>
+              <View style={{ alignItems: 'center', marginBottom: 15  }}>
+                <Image source={require('../constants/images/logoBackTrans.png')} style={{ width: 100, height: 100 }}/>
+              </View>
+              <View style={styles.inputContainer}>
+                <FontAwesome name="user-circle" size={17} color="red" />
+                <Text style={styles.loginLabel}>Name</Text>
+                <TextInput style={styles.textInput}
+                  ref={(input) => { this.focusName = input; }}
+                  placeholder={'Name'}
+                  underlineColorAndroid='transparent'
+                  returnKeyType="next"
+                  onSubmitEditing={() => this.focusUserName.focus()}
+                />
+              </View>
+              <View style={styles.inputContainer}>
+                <FontAwesome name="phone" size={20} color="red" />
+                <Text style={styles.loginLabel}>Username</Text>
+                <TextInput style={styles.textInput}
+                  ref={(input) => { this.focusUserName = input; }}
+                  placeholder={'Phone Number'}
+                  underlineColorAndroid='transparent'
+                  keyboardType={'phone-pad'}
+                  returnKeyType="next"
+                  onSubmitEditing={() => this.focusEmail.focus()}
+                />
+              </View>
+              <View style={styles.inputContainer}>
+                <FontAwesome name="envelope" size={17} color="red" />
+                <Text style={styles.loginLabel}>Email</Text>
+                <TextInput style={styles.textInput}
+                  ref={(input) => { this.focusEmail = input; }}
+                  placeholder={'Email Address'}
+                  underlineColorAndroid='transparent'
+                  keyboardType={'email-address'}
+                  returnKeyType="next"
+                  onSubmitEditing={() => this.focusPassword.focus()}
+                />
+              </View>
+              <View style={[styles.inputContainer]}>
+                <FontAwesome name="lock" size={20} color="red" />
+                <Text style={styles.loginLabel}>Password</Text>
+                <TextInput style={styles.textInput}
+                  ref={(input) => { this.focusPassword = input; }}
+                  placeholder={'Password'}
+                  underlineColorAndroid='transparent'
+                  secureTextEntry
+                  returnKeyType="next"
+                  onSubmitEditing={() => this.focusReferral.focus()}
+                />
+              </View>
+              <View style={[styles.inputContainer, { borderBottomWidth: 0 }]}>
+                <FontAwesome name="users" size={20} color="red" />
+                <Text style={styles.loginLabel}>Referral Code</Text>
+                <TextInput style={styles.textInput}
+                  ref={(input) => { this.focusReferral = input; }}
+
+                  placeholder={'Referral Code'}
+                  underlineColorAndroid='transparent'
+                  secureTextEntry
+
+                />
+              </View>
+              <TouchableOpacity activeOpacity={0.7} style={[styles.fullWidthButton, styles.redBackground]}>
+                <Text style={styles.buttonText}>Register</Text>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity activeOpacity={0.7} style={[styles.fullWidthButton, styles.redBackground]}>
-              <Text style={styles.buttonText}>Register</Text>
-            </TouchableOpacity>
+
           </View>
-        </View>
-      </ImageBackground>
+        </ImageBackground>
+      </KeyboardAvoidingView>
+
     </ScrollView>
     )
   }
 }
-
 
 export default Register;

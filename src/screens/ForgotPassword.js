@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, Dimensions , TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, ImageBackground, Dimensions , TextInput,
+   TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, Animated, Keyboard } from 'react-native';
 import styles from '../styles/Login';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
@@ -15,22 +16,55 @@ class ForgotPassword extends Component {
       width,
       height,
     };
+    this.logoStyle = new Animated.Value(0)
   }
+
+  componentDidMount() {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardHide);
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardShow = () => {
+    Animated.timing(this.logoStyle, {
+      toValue: 300,
+      duration: 250
+    }).start();
+  }
+
+  _keyboardHide = () => {
+    Animated.timing(this.logoStyle, {
+      toValue: 0,
+      duration: 250
+    }).start();
+  }
+
   _onLayoutDidChange = (e) => {
    const layout = e.nativeEvent.layout;
    this.setState({ width: layout.width, height: layout.height });
   }
   render() {
+    const logoStyle = [
+      styles.logoStyle, {
+        marginTop: this.logoStyle
+      }
+    ];
     return (
       <ScrollView onLayout={this._onLayoutDidChange}>
+      <KeyboardAvoidingView behavior="position">
+
         <ImageBackground
           style={{ width: this.state.width, height: this.state.height <= 360 ? '100%': this.state.height }}
 
           source={{ uri: remote }}>
-          <View style={styles.container}>
+          <View  style={[styles.container, { justifyContent: 'center' }]}>
             <View>
               <View style={{ alignItems: 'center', marginBottom: 15  }}>
-                <Image source={require('../constants/images/logoBackTrans.png')} style={{ width: 100, height: 100 }}/>
+                <Animated.Image source={require('../constants/images/logoBackTrans.png')} style={logoStyle}/>
               </View>
               <View style={styles.inputContainer}>
                 <FontAwesome name="phone" size={20} color="red" />
@@ -55,6 +89,7 @@ class ForgotPassword extends Component {
             </View>
           </View>
         </ImageBackground>
+        </KeyboardAvoidingView>
       </ScrollView>
     )
   }
