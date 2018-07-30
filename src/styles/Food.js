@@ -1,30 +1,25 @@
-import { StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
 	textStyle: {
-		color: 'white',
+		color: '$white',
 		paddingTop: 10,
 		fontSize: 12,
 		fontWeight: 'bold'
 	},
 	underlineStyle: {
-		backgroundColor: '#FDA400'
+		backgroundColor: '$orangeTheme'
 	},
 	tabBar: {
-		backgroundColor: '#131313'
+		backgroundColor: '$lightBlack'
 	},
 	contentContainer: {
 		flex: 1,
 		marginTop: 157
 	},
-	progressBar: {
-		backgroundColor: '#0a0a0a',
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
+
 	container: {
-		backgroundColor: '#0a0a0a'
+		backgroundColor: '$black'
 	},
 	swiper: {
 		// position: 'absolute',
@@ -40,7 +35,7 @@ const styles = StyleSheet.create({
 	imageBackdrop: {
 		// flex: 1,
 		height: 248,
-		backgroundColor: 'black'
+		backgroundColor: '$black'
 	},
 	cardContainer: {
 		flex: 1,
@@ -61,17 +56,17 @@ const styles = StyleSheet.create({
 		paddingTop: 40
 	},
 	cardTitle: {
-		color: 'white',
+		color: '$white',
 		fontSize: 19,
 		fontWeight: '500',
 		paddingTop: 10
 	},
 	cardTagline: {
-		color: 'white',
+		color: '$white',
 		fontSize: 15
 	},
   foodType: {
-    color: 'white',
+    color: '$white',
     fontSize: 13
   },
 	cardGenre: {
@@ -81,7 +76,7 @@ const styles = StyleSheet.create({
 		textAlign: 'left',
 		fontSize: 11,
 		marginRight: 5,
-		color: 'white'
+		color: '$white'
 	},
 	cardNumbers: {
 		flexDirection: 'row',
@@ -93,14 +88,14 @@ const styles = StyleSheet.create({
 	cardStarRatings: {
 		marginLeft: 5,
 		fontSize: 12,
-		color: 'white'
+		color: '$white'
 	},
 	cardRunningHours: {
 		marginLeft: 5,
 		fontSize: 12
 	},
   buyButton: {
-    backgroundColor: '#FDA400',
+    backgroundColor: '$orangeTheme',
     width: 70,
     height: 25,
     justifyContent: 'center',

@@ -1,17 +1,17 @@
-import { StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     // backgroundColor: '#DBDCE0',
-    backgroundColor: '#e8e8ea'
+    backgroundColor: '$lightGrey'
   },
   checkoutHeader: {
     fontSize: 15,
-    color: 'black',
+    color: '$black',
     fontWeight: '500'
   },
   checkoutCard: {
-    backgroundColor: 'white',
+    backgroundColor: '$white',
     elevation: 2,
     padding: 10,
     margin: 10
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   inputField: {
     height: 40,
     borderWidth: 0.5,
-    borderColor: '#DBDCE0',
+    borderColor: '$grey',
     width: '100%',
     padding: 7,
     marginTop: 15,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   saveButton: {
     width: '100%',
     height: 45,
-    backgroundColor: '#FDA400',
+    backgroundColor: '$orangeTheme',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 3,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   orderDetailsInner: {
     flexDirection: 'row',
     borderBottomWidth: 0.5,
-    borderColor: '#DBDCE0',
+    borderColor: '$grey',
     height: 40,
     alignItems: 'center'
   },
@@ -46,23 +46,23 @@ const styles = StyleSheet.create({
   },
   addressListSection: {
     // borderBottomWidth: 0.5,
-    // borderColor: '#DBDCE0',
+    // borderColor: '$grey',
     marginBottom: 10,
     paddingBottom: 10
   },
   applyButton: {
     borderWidth: 1,
-    borderColor: '#DBDCE0',
+    borderColor: '$grey',
     borderRadius: 3,
     height: 40,
     paddingHorizontal: 9,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 7,
-    backgroundColor: '#FDA400'
+    backgroundColor: '$orangeTheme'
   },
   continueButton: {
-    backgroundColor: '#FDA400',
+    backgroundColor: '$orangeTheme',
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',

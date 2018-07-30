@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, Dimensions, ScrollView, TextInput,
    TouchableOpacity, Image, KeyboardAvoidingView, Keyboard, Animated } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from '../styles/Login';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
@@ -72,7 +73,7 @@ class Login extends Component {
               <Animated.Image resizeMode='contain' source={require('../constants/images/logoBackTrans.png')} style={logoStyle}/>
             </View>
             <View style={styles.inputContainer}>
-              <FontAwesome name="phone" size={20} color="red" />
+              <FontAwesome name="phone" size={20} color={EStyleSheet.value('$red')} />
               <Text style={styles.loginLabel}>Username</Text>
               <TextInput style={styles.textInput}
                 ref={input => { this.focusUserName = input; }}
@@ -84,7 +85,7 @@ class Login extends Component {
               />
             </View>
             <View style={[styles.inputContainer, { borderTopWidth: 1 }]}>
-              <FontAwesome name="lock" size={20} color="red" />
+              <FontAwesome name="lock" size={20} color={EStyleSheet.value('$red')} />
               <Text style={styles.loginLabel}>Password</Text>
               <TextInput style={styles.textInput}
                 ref={input => { this.focusPassword = input; }}
@@ -97,7 +98,7 @@ class Login extends Component {
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('forgotPassword') }
               activeOpacity={0.7} style={{ marginVertical: 10 }}>
-              <Text style={{ color: '#fff' }}>Forgot Password?</Text>
+              <Text style={{ color: EStyleSheet.value('$white') }}>Forgot Password?</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('locationList') }

@@ -1,8 +1,9 @@
 import { Platform, StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
 	container: {
-		backgroundColor: 'black',
+		backgroundColor: '$black',
     // padding: 15,
     // color: '#fff',
 		// ...Platform.select({
@@ -16,14 +17,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 248,
-    position: 'absolute'
-  },
-	progressBar: {
-		backgroundColor: '#0a0a0a',
-		flex: 1,
+    position: 'absolute',
 		justifyContent: 'center',
 		alignItems: 'center'
-	},
+  },
+
   listHeading: {
   paddingHorizontal: 16,
   flexDirection: 'row',
@@ -33,12 +31,12 @@ const styles = StyleSheet.create({
   marginTop: 30
 },
 listHeadingLeft: {
-  color: 'white',
+  color: '$white',
   fontWeight: 'bold',
   fontSize: 18
 },
 listHeadingRight: {
-  color: 'white',
+  color: '$white',
   ...Platform.select({
     ios: {
       fontSize: 15
@@ -60,6 +58,19 @@ browseList: {
     }
   })
 },
+viewDetails: {
+	borderColor: '$red',
+	borderWidth: 1,
+	borderRadius: 3,
+	justifyContent: 'center',
+	alignItems: 'center',
+	width: 100,
+	height: 35,
+},
+viewDetailsButtonText: {
+	color: '$white',
+	fontWeight: '600'
+}
 });
 
 export default styles;

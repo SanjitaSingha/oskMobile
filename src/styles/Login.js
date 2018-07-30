@@ -1,13 +1,13 @@
 import { Platform, StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
 	container: {
 		flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center',
 		backgroundColor: 'rgba(0,0,0,.5)',
     padding: 15,
-    // color: '#fff',
 		...Platform.select({
 			ios: {
 				paddingTop: 83
@@ -16,10 +16,8 @@ const styles = StyleSheet.create({
 	},
   inputContainer: {
     borderBottomWidth: 0.5,
-    borderColor: '#dedede',
-    backgroundColor: '#fff',
-    // backgroundColor: '#dedede',
-    // backgroundColor: 'rgba(0,0,0,.7)',
+    borderColor: '$grey',
+    backgroundColor: '$white',
     flexDirection: 'row',
     alignItems: 'center',
     padding: 5
@@ -40,26 +38,26 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   buttonText: {
-    color: '#fff',
+    color: '$white',
 		fontWeight: 'bold'
   },
 
   yellowBackground: {
-    backgroundColor: '#FDA400'
+    backgroundColor: '$orangeTheme'
   },
   redBackground: {
-    backgroundColor: 'red'
+    backgroundColor: '$red'
   },
-	progressBar: {
-		backgroundColor: '#0a0a0a',
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	seperator: {
-		marginTop: 10,
-		backgroundColor: '#8E8E8E'
-	},
+	// progressBar: {
+	// 	backgroundColor: '#0a0a0a',
+	// 	flex: 1,
+	// 	justifyContent: 'center',
+	// 	alignItems: 'center'
+	// },
+	// seperator: {
+	// 	marginTop: 10,
+	// 	backgroundColor: '#8E8E8E'
+	// },
 	logoStyle: {
 		width: 110,
 		height: 110,

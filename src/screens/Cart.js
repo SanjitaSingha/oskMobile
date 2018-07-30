@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, Dimensions, RefreshControl } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from '../styles/Cart';
 import { Ionicons, FontAwesome, Feather } from '@expo/vector-icons';
 
@@ -57,8 +58,8 @@ class Cart extends Component {
     return (
       <View style={[styles.cartHeader, { width: '100%', paddingHorizontal: 50 }]}>
         <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Text style={{ color: 'white', fontSize: 15 }}>SUB TOTAL</Text>
-          <Text style={{ color: 'white', fontSize: 17, fontWeight: 'bold' }}>
+          <Text style={{ color: EStyleSheet.value('$white'), fontSize: 15 }}>SUB TOTAL</Text>
+          <Text style={{ color: EStyleSheet.value('$white'), fontSize: 17, fontWeight: 'bold' }}>
             Rs. <Text>{total}</Text>
           </Text>
         </View>
@@ -98,7 +99,7 @@ class Cart extends Component {
             onPress={() => this.props.navigation.navigate('checkout', { subTotal: total })}
           >
             <Text style={{ marginRight: 5 }}>Checkout</Text>
-            <Feather name='check-square' size={20} color='black' />
+            <Feather name='check-square' size={20} color={EStyleSheet.value('$black')} />
           </TouchableOpacity>
         </View>
       )
@@ -170,13 +171,13 @@ class Cart extends Component {
         stickyHeaderIndices={[0]}
         refreshControl={
         <RefreshControl
-          refreshing={false}
-          onRefresh={() => { console.log('Test'); }}
-          colors={['#FDA400']}
-          tintColor="white"
-          title="loading..."
-          titleColor="white"
-          progressBackgroundColor="white"
+            refreshing={false}
+            onRefresh={() => { console.log('Test'); }}
+            colors={['#FDA400']}
+            tintColor='white'
+            title="loading..."
+            titleColor='white'
+            progressBackgroundColor='white'
         />}
         data={this.state.cartItem}
         renderItem={({ item }) =>  (
@@ -187,17 +188,17 @@ class Cart extends Component {
                 <Text style={[styles.foodName, { marginBottom: 5 }]}>{item.foodName}</Text>
                 <View>
                   <Text>
-                    <FontAwesome name="rupee" size={15} color="black" style={{ paddingRight: 5 }} />
+                    <FontAwesome name="rupee" size={15} color={EStyleSheet.value('$black')} style={{ paddingRight: 5 }} />
                     <Text style={styles.lightPriceBoldFont}>{item.price} X {item.id === this.state.currentCard ? this.state.quantity : item.quantity}</Text>
                   </Text>
                   <View style={{ flexDirection: 'row', marginVertical: 7 }}>
-                    <FontAwesome onPress={() => this.increaseQuntity(item.quantity, item.price, item.id)} name="plus-circle" size={25} color="#ada8a8" />
+                    <FontAwesome onPress={() => this.increaseQuntity(item.quantity, item.price, item.id)} name="plus-circle" size={25} color={EStyleSheet.value('$darkGrey')} />
                     <Text style={[{ marginHorizontal: 10 }]}>{item.id === this.state.currentCard ? this.state.quantity : item.quantity}</Text>
-                    <FontAwesome onPress={() => this.reduceQuntity(item.quantity, item.price, item.id)} name="minus-circle" size={25} color="#ada8a8" />
+                    <FontAwesome onPress={() => this.reduceQuntity(item.quantity, item.price, item.id)} name="minus-circle" size={25} color={EStyleSheet.value('$darkGrey')} />
                   </View>
                   <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Text style={[styles.priceBoldFont, { marginTop: 5, marginRight: 15 }]} >
-                      <FontAwesome name="rupee" size={20} color="black" />
+                      <FontAwesome name="rupee" size={20} color={EStyleSheet.value('$black')} />
                       {item.quantity * item.price}
                     </Text>
                     <TouchableOpacity onPress={() => this.removeItemCart(item.id)} style={styles.removeButton}>

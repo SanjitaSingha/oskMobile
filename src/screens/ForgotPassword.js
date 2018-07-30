@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, Dimensions , TextInput,
    TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, Animated, Keyboard } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from '../styles/Login';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
@@ -67,7 +68,7 @@ class ForgotPassword extends Component {
                 <Animated.Image source={require('../constants/images/logoBackTrans.png')} style={logoStyle}/>
               </View>
               <View style={styles.inputContainer}>
-                <FontAwesome name="phone" size={20} color="red" />
+                <FontAwesome name="phone" size={20} color={EStyleSheet.value('$red')} />
                 <Text style={styles.loginLabel}>Phone Number</Text>
                 <TextInput style={styles.textInput}
                   placeholder={'Registered Mobile Number'}
@@ -76,8 +77,8 @@ class ForgotPassword extends Component {
                 />
               </View>
 
-              <Text style={{ color: 'white', marginVertical: 15 }}>
-                We will send a temporary password to your <Text style={{ color: 'yellow' }}>Registered Mobile Number.</Text>
+              <Text style={{ color: EStyleSheet.value('$white'), marginVertical: 15 }}>
+                We will send a temporary password to your <Text style={{ color: EStyleSheet.value('$orangeTheme') }}>Registered Mobile Number.</Text>
                 You can later change the password in the Profile section.
               </Text>
 

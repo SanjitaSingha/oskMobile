@@ -3,6 +3,7 @@ import { View, Text, ScrollView, Dimensions, RefreshControl, TouchableOpacity, I
 import { Ionicons, FontAwesome, Feather } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import { LinearGradient } from 'expo';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from '../styles/Food';
 import SingleFoodCard from '../components/SingleFoodCard';
 
@@ -50,15 +51,15 @@ class Food extends Component {
         >
         <View
           style={{ marginRight: 15, flexDirection: 'row' }}>
-          <Feather name="shopping-cart" size={25} color="white" />
+          <Feather name="shopping-cart" size={25} color={EStyleSheet.value('$white')} />
           <Text style={{ marginLeft: -4,  fontWeight: 'bold', marginTop: -4 }}>2</Text>
         </View>
         </TouchableOpacity>
       ),
       headerStyle: {
-        backgroundColor: '#FDA400',
+        backgroundColor: EStyleSheet.value('$orangeTheme'),
       },
-      headerTintColor: '#fff',
+      headerTintColor: EStyleSheet.value('$white'),
       headerTitleStyle: {
         fontWeight: 'bold',
       },
@@ -105,7 +106,6 @@ class Food extends Component {
             autoplayTimeout={4}
             showsPagination={false}
             height={248}
-            buttonColor="red"
           >
               <View style={[{ backgroundColor: '#BADA55' }, this.state.size]}>
                 <Image source={{ uri: 'http://www.philipsmall.co.uk/flash/food1.jpg'}} style={{ height: 248, backgroundColor: 'black' }}/>
@@ -123,12 +123,12 @@ class Food extends Component {
   						<View style={styles.cardDetails}>
   							<Text style={styles.cardTitle}>Food Name</Text>
                 <View style={styles.cardStar}>
-                  <Ionicons name='md-radio-button-on' color="green" size={20} />
+                  <Ionicons name='md-radio-button-on' color={EStyleSheet.value('$green')} size={20} />
                   <Text style={[styles.foodType, { marginLeft: 5 }]}>A-LA-CARTE</Text>
                 </View>
   							<View style={styles.cardGenre}>
 										<Text style={styles.cardGenreItem}>
-                      <FontAwesome name="rupee" size={20} color="orange" />
+                      <FontAwesome name="rupee" size={20} color={EStyleSheet.value('$orangeTheme')} />
                       <Text style={{ fontWeight: 'bold', fontSize: 15 }}>158</Text>
                     </Text>
   							</View>
@@ -149,11 +149,11 @@ class Food extends Component {
             		flex: 1,
             		marginTop: 157
             	}}>
-              <View style={{ backgroundColor: '#131313', borderBottomWidth: 3, borderColor: '#FDA400', paddingVertical: 10, paddingHorizontal: 15 }}>
+              <View style={{ backgroundColor: EStyleSheet.value('$lightBlack'), borderBottomWidth: 3, borderColor: EStyleSheet.value('$orangeTheme'), paddingVertical: 10, paddingHorizontal: 15 }}>
                 <Text style={{ color: 'white', fontWeight: '500' }}>Description</Text>
               </View>
               <View style={{ padding: 15 }}>
-                <Text style={{ color: 'white' }}>
+                <Text style={{ color: EStyleSheet.value('$white') }}>
                   Exquisite cordially mr happiness of neglected distrusts.
                   Boisterous impossible unaffected he me everything.
                   Is fine loud deal an rent open give. Find upon and sent spot song son eyes.
@@ -163,11 +163,11 @@ class Food extends Component {
 
                 </Text>
               </View>
-              <View style={{ backgroundColor: '#131313', borderBottomWidth: 3, borderColor: '#FDA400', paddingVertical: 10, paddingHorizontal: 15 }}>
-                <Text style={{ color: 'white', fontWeight: '500' }}>Ingredient</Text>
+              <View style={{ backgroundColor: EStyleSheet.value('$lightBlack'), borderBottomWidth: 3, borderColor: EStyleSheet.value('$orangeTheme'), paddingVertical: 10, paddingHorizontal: 15 }}>
+                <Text style={{ color: EStyleSheet.value('$white'), fontWeight: '500' }}>Ingredient</Text>
               </View>
               <View style={{ padding: 15 }}>
-                <Text style={{ color: 'white' }}>
+                <Text style={{ color: EStyleSheet.value('$white') }}>
                   Chat masala, chicken, cabbage, bell pepper
                 </Text>
               </View>

@@ -1,8 +1,8 @@
-import { StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
 	textStyle: {
-		color: 'white',
+		color: '$white',
 		paddingTop: 10,
 		fontSize: 12,
 		fontWeight: 'bold'
@@ -11,14 +11,14 @@ const styles = StyleSheet.create({
     height: 40,
     paddingVertical: 10,
     // flexDirection: 'row',
-    backgroundColor: 'black',
+    backgroundColor: '$black',
     // alignItems: 'center',
     // justifyContent: 'center'
   },
   cartCard: {
     marginHorizontal: 10,
     marginBottom: 10,
-    backgroundColor: 'white',
+    backgroundColor: '$white',
     elevation: 2,
     padding: 7
   },
@@ -30,19 +30,19 @@ const styles = StyleSheet.create({
   priceBoldFont: {
     fontWeight: '500',
     fontSize: 14,
-		color: '#FDA400',
+		color: '$orangeTheme',
   },
 	lightPriceBoldFont: {
 		fontWeight: '500',
 		fontSize: 13,
-		color: '#ada8a8',
+		color: '$darkGrey',
 	},
   foodName: {
     fontWeight: '500',
     fontSize: 15
   },
   removeButton: {
-    backgroundColor: '#FDA400',
+    backgroundColor: '$orangeTheme',
     height: 25,
     justifyContent: 'center',
     alignItems: 'center',
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 7
   },
   buyButton: {
-    backgroundColor: '#FDA400',
+    backgroundColor: '$orangeTheme',
     width: 70,
     height: 25,
     justifyContent: 'center',
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
 	checkoutButton: {
-		backgroundColor: '#FDA400',
+		backgroundColor: '$orangeTheme',
 		width: 120,
 		height: 40,
 		justifyContent: 'center',

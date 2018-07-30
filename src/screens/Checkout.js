@@ -4,6 +4,7 @@ import { View, Text, ScrollView, Dimensions, RefreshControl,
   TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { Ionicons, Feather, FontAwesome } from '@expo/vector-icons';
 import { LinearGradient } from 'expo';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from '../styles/Checkout';
 
 const fakeId = 2;
@@ -87,11 +88,11 @@ class Checkout extends Component {
   renderNewAddressForm() {
     return (
       <KeyboardAvoidingView behavior='padding'>
-        <View style={{ borderTopWidth: 0.5, borderColor: '#FDA400', paddingTop: 10, paddingHorizontal: 5 }}>
+        <View style={{ borderTopWidth: 0.5, borderColor: EStyleSheet.value('$orangeTheme'), paddingTop: 10, paddingHorizontal: 5 }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <Text style={styles.checkoutHeader}>Please Fill Up delivery Address</Text>
             <TouchableOpacity onPress={() => this.setState({ address: true })}>
-              <Ionicons name='ios-close-circle' size={30} color='#FDA400' />
+              <Ionicons name='ios-close-circle' size={30} color={EStyleSheet.value('$orangeTheme')} />
             </TouchableOpacity>
           </View>
           <View>
@@ -183,10 +184,10 @@ class Checkout extends Component {
   renderEditButton(i, data) {
     if(i === this.state.addressSelected) {
       return (
-        <View style={{ marginTop: 7, borderColor: '#01b20d', borderTopWidth: 0.8, paddingTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <View style={{ marginTop: 7, borderColor: EStyleSheet.value('$green'), borderTopWidth: 0.8, paddingTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <TouchableOpacity
             onPress={() => this.editAddress(data)}
-            style={{ flex: 1, borderRightWidth: 1.5, borderColor: '#01b20d', justifyContent: 'center', alignItems: 'center' }}
+            style={{ flex: 1, borderRightWidth: 1.5, borderColor: EStyleSheet.value('$green'), justifyContent: 'center', alignItems: 'center' }}
           >
             <Text>EDIT</Text>
           </TouchableOpacity>
@@ -206,12 +207,12 @@ class Checkout extends Component {
       return (
         <View style={{ position: 'relative' }}>
 
-          <FontAwesome name='check-circle' size={20} color='#01b20d'
-            style={{ opacity: i === this.state.addressSelected ? 1 : 0, backgroundColor: 'white', position: 'absolute', top: -10, right: -5, zIndex: 100 }}/>
+          <FontAwesome name='check-circle' size={20} color={EStyleSheet.value('$green')}
+            style={{ opacity: i === this.state.addressSelected ? 1 : 0, backgroundColor: EStyleSheet.value('$white'), position: 'absolute', top: -10, right: -5, zIndex: 100 }}/>
 
           <TouchableOpacity
             onPress={() => this.setState({ addressSelected: i, continueDisabled: false })}
-            style={[styles.addressListSection, { zIndex: -100, padding: 5, borderColor: '#01b20d', borderWidth: i === this.state.addressSelected ? 0.8 : 0 }]}>
+            style={[styles.addressListSection, { zIndex: -100, padding: 5, borderColor: EStyleSheet.value('$green'), borderWidth: i === this.state.addressSelected ? 0.8 : 0 }]}>
             <Text style={[styles.checkoutHeader]}>
               {d.name}
             </Text>
@@ -322,10 +323,14 @@ class Checkout extends Component {
             <Text style={[styles.checkoutHeader, { marginBottom: 5 }]}>Choose Billing Mode</Text>
             <View>
               <TouchableOpacity onPress={() => this.setState({ cod: true })} style={{ paddingHorizontal: 5, paddingVertical: 10, backgroundColor: this.state.cod ? 'black' : 'white' }}>
-                <Text style={{ color: this.state.cod ? 'white' : 'black', fontWeight: 'bold' }}>Cash on Delivery</Text>
+                <Text style={{ color: this.state.cod ? EStyleSheet.value('$white') : EStyleSheet.value('$black'), fontWeight: 'bold' }}>
+                  Cash on Delivery
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => this.setState({ cod: false })} style={{ paddingHorizontal: 5, paddingVertical: 10, backgroundColor: !this.state.cod ? 'black' : 'white' }}>
-                <Text style={{ color: !this.state.cod ? 'white' : 'black', fontWeight: 'bold' }}>Online Payment</Text>
+                <Text style={{ color: !this.state.cod ? EStyleSheet.value('$white') : EStyleSheet.value('$black'), fontWeight: 'bold' }}>
+                  Online Payment
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -333,7 +338,7 @@ class Checkout extends Component {
 
         </ScrollView>
         <TouchableOpacity disabled={this.state.continueDisabled} style={[styles.continueButton, { backgroundColor: this.state.continueDisabled ? '#fccb76' : '#FDA400' }]}>
-          <Text style={[{ color: this.state.continueDisabled ? 'grey' : 'black' }]}>CONTINUE</Text>
+          <Text style={[{ color: this.state.continueDisabled ? EStyleSheet.value('$grey') : EStyleSheet.value('$black') }]}>CONTINUE</Text>
         </TouchableOpacity>
       </View>
     )

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, Dimensions , TextInput,
    TouchableOpacity, Image, ScrollView, KeyboardAvoidingView } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from '../styles/Login';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
@@ -38,7 +39,7 @@ class Register extends Component {
                 <Image source={require('../constants/images/logoBackTrans.png')} style={{ width: 100, height: 100 }}/>
               </View>
               <View style={styles.inputContainer}>
-                <FontAwesome name="user-circle" size={17} color="red" />
+                <FontAwesome name="user-circle" size={17} color={EStyleSheet.value('$red')} />
                 <Text style={styles.loginLabel}>Name</Text>
                 <TextInput style={styles.textInput}
                   ref={(input) => { this.focusName = input; }}
@@ -49,7 +50,7 @@ class Register extends Component {
                 />
               </View>
               <View style={styles.inputContainer}>
-                <FontAwesome name="phone" size={20} color="red" />
+                <FontAwesome name="phone" size={20} color={EStyleSheet.value('$red')} />
                 <Text style={styles.loginLabel}>Username</Text>
                 <TextInput style={styles.textInput}
                   ref={(input) => { this.focusUserName = input; }}
@@ -61,7 +62,7 @@ class Register extends Component {
                 />
               </View>
               <View style={styles.inputContainer}>
-                <FontAwesome name="envelope" size={17} color="red" />
+                <FontAwesome name="envelope" size={17} color={EStyleSheet.value('$red')} />
                 <Text style={styles.loginLabel}>Email</Text>
                 <TextInput style={styles.textInput}
                   ref={(input) => { this.focusEmail = input; }}
@@ -73,7 +74,7 @@ class Register extends Component {
                 />
               </View>
               <View style={[styles.inputContainer]}>
-                <FontAwesome name="lock" size={20} color="red" />
+                <FontAwesome name="lock" size={20} color={EStyleSheet.value('$red')} />
                 <Text style={styles.loginLabel}>Password</Text>
                 <TextInput style={styles.textInput}
                   ref={(input) => { this.focusPassword = input; }}
@@ -85,7 +86,7 @@ class Register extends Component {
                 />
               </View>
               <View style={[styles.inputContainer, { borderBottomWidth: 0 }]}>
-                <FontAwesome name="users" size={20} color="red" />
+                <FontAwesome name="users" size={20} color={EStyleSheet.value('$red')} />
                 <Text style={styles.loginLabel}>Referral Code</Text>
                 <TextInput style={styles.textInput}
                   ref={(input) => { this.focusReferral = input; }}

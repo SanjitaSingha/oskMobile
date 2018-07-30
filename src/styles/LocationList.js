@@ -1,11 +1,12 @@
-import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+import EStyleSheet from 'react-native-extended-stylesheet';
+
+const styles = EStyleSheet.create({
   container: {
-    backgroundColor: 'white'
+    backgroundColor: '$white'
   },
   searchBarContainer: {
-    backgroundColor: '#DBDCE0',
+    backgroundColor: '$grey',
     height: 50,
     padding: 7,
     justifyContent: 'center',

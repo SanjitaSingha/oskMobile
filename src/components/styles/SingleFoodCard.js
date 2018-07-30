@@ -1,10 +1,10 @@
-import { StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
 	cardContainer: {
 		height: 231,
 		width: 160,
-		backgroundColor: 'white',
+		backgroundColor: '$white',
 		flexDirection: 'column',
 		marginRight: 10,
 		borderRadius: 3
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center'
 	},
 	cardTitle: {
-		color: 'black',
+		color: '$black',
 		fontSize: 13,
 		fontWeight: '500',
 		textAlign: 'center',

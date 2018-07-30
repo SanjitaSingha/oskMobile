@@ -1,8 +1,8 @@
-import { StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
-    backgroundColor: 'black'
+    backgroundColor: '$black'
   },
   profileButton: {
     justifyContent: 'center',
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 3,
-    backgroundColor: '#FDA400',
+    backgroundColor: '$orangeTheme',
     width: 100,
     height: 30,
     marginTop: 5
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
-    backgroundColor: '#131313',
+    backgroundColor: '$lightBlack',
     padding: 7,
     elevation: 2,
     alignItems: 'center'
@@ -32,21 +32,21 @@ const styles = StyleSheet.create({
   inputField: {
     height: 40,
     borderWidth: 0.5,
-    borderColor: '#DBDCE0',
+    borderColor: '$grey',
     width: '100%',
     padding: 7,
     marginTop: 15,
     marginBottom: 10
   },
   textStyle: {
-    color: 'white',
+    color: '$white',
     fontSize: 15
   },
   modalContainer: {
     backgroundColor: 'rgba(255,255,255, 0.5)',
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 15
+    paddingHorizontal: 20
   },
   closeContainer: {
     flexDirection: 'row',
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   modalInputCard: {
     padding: 15,
-    backgroundColor: 'white'
+    backgroundColor: '$white'
   }
 });
 

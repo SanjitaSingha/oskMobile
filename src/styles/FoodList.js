@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
-    backgroundColor: 'black'
+    backgroundColor: '$black'
   },
   searchBarContainer: {
-    backgroundColor: '#DBDCE0',
+    backgroundColor: '$grey',
     height: 50,
     padding: 7,
     justifyContent: 'center',
@@ -14,14 +15,14 @@ const styles = StyleSheet.create({
   foodListCard: {
     marginVertical: 10,
     padding: 10,
-    backgroundColor: '#131313'
+    backgroundColor: '$lightBlack'
   },
   cardImage: {
     width: '100%',
     height: 200,
   },
   foodName: {
-    color: '#fff',
+    color: '$white',
     fontSize: 15,
     fontWeight: 'bold'
   }

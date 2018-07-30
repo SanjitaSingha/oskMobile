@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, FlatList, Dimensions,
   RefreshControl, TouchableOpacity, Image, TextInput } from 'react-native';
 import { Ionicons, FontAwesome, EvilIcons } from '@expo/vector-icons';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import Swiper from 'react-native-swiper';
 import { LinearGradient } from 'expo';
 import styles from '../styles/FoodList';
@@ -16,7 +17,8 @@ const nonVeg = [
     image: 'http://www.philipsmall.co.uk/flash/food1.jpg',
     description: 'The famous north Indian Chicken fodd Item',
     veg: true,
-    foodType: 'A-LA-CARTE'
+    foodType: 'A-LA-CARTE',
+    price: '451.47'
   },
   {
     id: 1,
@@ -24,7 +26,8 @@ const nonVeg = [
     image: 'https://cdnimg.webstaurantstore.com/images/products/large/77391/480506.jpg',
     description: 'The famous north Indian Chicken fodd Item',
     veg: false,
-    foodType: 'MEAL'
+    foodType: 'MEAL',
+    price: '451.47'
   },
   {
     id: 2,
@@ -32,7 +35,8 @@ const nonVeg = [
     image: 'http://www.philipsmall.co.uk/flash/food1.jpg',
     description: 'The famous north Indian Chicken fodd Item',
     veg: true,
-    foodType: 'A-LA-CARTE'
+    foodType: 'A-LA-CARTE',
+    price: '451.47'
   },
   {
     id: 3,
@@ -40,7 +44,8 @@ const nonVeg = [
     image: 'http://www.philipsmall.co.uk/flash/food1.jpg',
     description: 'The famous north Indian Chicken fodd Item',
     veg: false,
-    foodType: 'MEAL'
+    foodType: 'MEAL',
+    price: '451.47'
   },
   {
     id: 4,
@@ -48,7 +53,8 @@ const nonVeg = [
     image: 'http://www.philipsmall.co.uk/flash/food1.jpg',
     description: 'The famous north Indian Chicken fodd Item',
     veg: true,
-    foodType: 'A-LA-CARTE'
+    foodType: 'A-LA-CARTE',
+    price: '451.47'
   },
 ];
 class FoodList extends Component {
@@ -73,18 +79,30 @@ class FoodList extends Component {
 
     this.state = {
       size: { width, height },
-      data: nonVeg
+      data: nonVeg,
+      refreshing: false
     };
   }
   _onLayoutDidChange = (e) => {
    const layout = e.nativeEvent.layout;
    this.setState({ size: { width: layout.width, height: layout.height } });
+ }
+
+ _fetchData() {
+   console.log('Data fetching unction running');
+   this.setState({ refreshing: false });
+ }
+
+  _onRefresh() {
+    this.setState({ refreshing: true });
+    this._fetchData();
   }
+
   renderHeader = () => {
     return (
       <View style={styles.searchBarContainer}>
         <View style={{ backgroundColor: 'white', padding: 5, width: '100%', flexDirection: 'row' }}>
-          <EvilIcons name='search' size={30} color='black' />
+          <EvilIcons name='search' size={30} color={EStyleSheet.value('$black')} />
           <TextInput
             onChangeText={(t) => this.setState({ search_text: t })}
             underlineColorAndroid='transparent'
@@ -107,13 +125,13 @@ class FoodList extends Component {
           stickyHeaderIndices={[0]}
           refreshControl={
           <RefreshControl
-            refreshing={false}
-            onRefresh={() => { console.log('Test'); }}
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
             colors={['#FDA400']}
-            tintColor="white"
+            tintColor='white'
             title="loading..."
-            titleColor="white"
-            progressBackgroundColor="white"
+            titleColor='white'
+            progressBackgroundColor='white'
           />}
           data={this.state.data}
           renderItem={({ item }) => (
@@ -123,11 +141,18 @@ class FoodList extends Component {
                 style={styles.cardImage}
               />
               <Text style={[styles.foodName, { marginVertical: 5 }]}>{item.title}</Text>
-              <Text numberOfLines={1} style={{ color: '#fff' }}>{item.description}</Text>
+              <Text numberOfLines={1} style={{ color: EStyleSheet.value('$white') }}>{item.description}</Text>
               <View style={{ flexDirection: 'row' }}>
-                <Ionicons name='md-radio-button-on' color={item.veg ? "green" : 'red'} size={20} />
-                <Text style={{ color: '#fff', marginLeft: 5 }}>{item.foodType}</Text>
+                <View style={{ flexDirection: 'row' }}>
+                  <Ionicons name='md-radio-button-on' color={item.veg ? EStyleSheet.value('$green') : EStyleSheet.value('$red')} size={20} />
+                  <Text style={{ color: EStyleSheet.value('$white'), marginLeft: 5 }}>{item.foodType}</Text>
+                </View>
+                <View style={{ flexDirection: 'row', marginLeft: 15 }}>
+                  <FontAwesome name='rupee' color={EStyleSheet.value('$orangeTheme')} size={20} />
+                  <Text style={{ color: EStyleSheet.value('$white'), marginLeft: 5 }}>{item.price}</Text>
+                </View>
               </View>
+
             </TouchableOpacity>
           )}
 

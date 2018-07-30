@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, FlatList, View, Text, Image, Dimensions, TouchableOpacity, RefreshControl, TextInput } from 'react-native';
 import styles from '../styles/LocationList';
 import { Ionicons, FontAwesome, EvilIcons } from '@expo/vector-icons';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width, height } = Dimensions.get('window');
 const locationList = [
@@ -103,16 +104,16 @@ class LocationList extends Component {
           refreshing={false}
           onRefresh={() => { console.log('Test'); }}
           colors={['#FDA400']}
-          tintColor="white"
+          tintColor='white'
           title="loading..."
-          titleColor="white"
-          progressBackgroundColor="white"
+          titleColor='white'
+          progressBackgroundColor='white'
         />}
         data={filteredArray}
         renderItem={({ item }) =>  (
           <TouchableOpacity onPress={() => this.props.navigation.navigate('home') } style={{ padding: 10, borderBottomWidth: 1, borderColor: '#DBDCE0' }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <EvilIcons name='location' size={30} color='#FDA400' />
+              <EvilIcons name='location' size={30} color={EStyleSheet.value('$orangeTheme')} />
               <Text>{item.location}</Text>
             </View>
           </TouchableOpacity>

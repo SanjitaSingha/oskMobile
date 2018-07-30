@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity, TextInput,
   Dimensions, RefreshControl, Modal, Share, KeyboardAvoidingView } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from '../styles/MyProfile';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
@@ -110,7 +111,7 @@ class MyProfile extends Component {
 
           </View>
 
-          <View style={{ borderTopWidth: 0.5, borderColor: '#ccc', paddingTop: 10, marginTop: 15 }}>
+          <View style={{ borderTopWidth: 0.5, borderColor: EStyleSheet.value('$grey'), paddingTop: 10, marginTop: 15 }}>
             <Text style={[styles.textStyle, { fontWeight: 'bold', marginBottom: 10 }]}>Address</Text>
             <View style={styles.detailsContainer}>
               <Text style={[styles.textStyle, { fontWeight: 'bold', flex: 1 }]}>Address Line1:</Text>
@@ -139,7 +140,7 @@ class MyProfile extends Component {
             </View>
           </View>
 
-          <View style={{ borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor: '#ccc', paddingVertical: 10, marginTop: 15 }}>
+          <View style={{ borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor: EStyleSheet.value('$grey'), paddingVertical: 10, marginTop: 15 }}>
             <Text style={[styles.textStyle, { fontWeight: 'bold' }]}>Wallet</Text>
             <View style={[styles.detailsContainer, { marginTop: 10 }]}>
               <Text style={[styles.textStyle]}>Available Points:</Text>
@@ -154,14 +155,14 @@ class MyProfile extends Component {
             {this.renderReferalCodeInfo()}
           </View>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 15 }}>
-            <TouchableOpacity style={[styles.profileButton, { backgroundColor: 'red' }]}>
+            <TouchableOpacity style={[styles.profileButton, { backgroundColor: EStyleSheet.value('$red') }]}>
               <Text style={[styles.textStyle, { fontWeight: 'bold' }]}>Log Out</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
                 this.setModalVisible(true);
               }}
-              style={[styles.profileButton, { backgroundColor: '#FDA400'}]}>
+              style={[styles.profileButton, { backgroundColor: EStyleSheet.value('$orangeTheme')}]}>
               <Text style={[styles.textStyle, { fontWeight: 'bold' }]}>Change Password</Text>
             </TouchableOpacity>
           </View>
@@ -183,7 +184,7 @@ class MyProfile extends Component {
                     onPress={() => {
                       this.setModalVisible(!this.state.modalVisible);
                     }}>
-                    <Ionicons name='ios-close-circle' size={30} color='#FDA400' />
+                    <Ionicons name='ios-close-circle' size={30} color={EStyleSheet.value('$orangeTheme')} />
                   </TouchableOpacity>
                 </View>
                 <TextInput
