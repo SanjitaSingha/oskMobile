@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions, RefreshControl, TouchableOpacity, Image } from 'react-native';
+import { View, Text, ScrollView, Dimensions, RefreshControl, TouchableOpacity, Image, InteractionManager } from 'react-native';
 import { Ionicons, FontAwesome, Feather } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import { LinearGradient } from 'expo';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { connect } from 'react-redux';
 import styles from '../styles/Food';
 import SingleFoodCard from '../components/SingleFoodCard';
+import { addFoodToCart, getAllCartItems } from  '../actions';
 
 
 const { width, height } = Dimensions.get('window');
@@ -52,7 +54,7 @@ class Food extends Component {
         <View
           style={{ marginRight: 15, flexDirection: 'row' }}>
           <Feather name="shopping-cart" size={25} color={EStyleSheet.value('$white')} />
-          <Text style={{ marginLeft: -4,  fontWeight: 'bold', marginTop: -4 }}>2</Text>
+          <Text style={{ marginLeft: -4,  fontWeight: 'bold', marginTop: -4 }}>{navigation.getParam('cartItemNo')}</Text>
         </View>
         </TouchableOpacity>
       ),
@@ -71,28 +73,54 @@ class Food extends Component {
 
     this.state = {
       size: { width, height },
+      cartItems: [],
+      refreshing: false,
     };
   }
-  // componentDidMount() {
-  //   this.props.navigation.setParams({ gotoCart: this.gotoCart() });
-  // }
-  // gotoCart() {
-  //   this.props.navigation.navigate('cart');
-  // }
+  componentDidMount() {
+    this.getAllCartItems();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps Food', this.props.cartItems, nextProps.cartItems);
+
+    if(nextProps.cartItems !== this.props.cartItems) {
+      this.setState({ cartItems: nextProps.cartItems });
+      const cartItemNo = nextProps.cartItems.length;
+      this.props.navigation.setParams({ cartItemNo: cartItemNo });
+      console.log('Props not equal', cartItemNo, this.props.navigation.state.params.cartItemNo);
+
+    }
+
+  }
+
+  getAllCartItems() {
+    this.props.getAllCartItems();
+    const cartItemNo = this.props.cartItems.length;
+    this.props.navigation.setParams({ cartItemNo: cartItemNo });
+  }
+
   _onLayoutDidChange = (e) => {
    const layout = e.nativeEvent.layout;
    this.setState({ size: { width: layout.width, height: layout.height } });
   }
 
+  addToCart(food) {
+    this.props.addFoodToCart(food);
+    // this.props.navigation.navigate('home');
+  }
+
   render() {
+    const { food } = this.props.navigation.state.params;
+    console.log('Food list', food);
     return (
       <View style={{ flex: 1 }}>
         <ScrollView onLayout={this._onLayoutDidChange}
           style={styles.container}
           refreshControl={
           <RefreshControl
-            refreshing={false}
-            onRefresh={() => { console.log('Test'); }}
+            refreshing={this.state.refreshing}
+            onRefresh={() => { this.getAllCartItems() }}
             colors={['#FDA400']}
             tintColor="white"
             title="loading..."
@@ -119,17 +147,17 @@ class Food extends Component {
             </Swiper>
 
             <View style={styles.cardContainer}>
-  						<Image source={{ uri: 'http://www.philipsmall.co.uk/flash/food1.jpg' }} style={styles.cardImage} />
+  						<Image source={{ uri: food.image }} style={styles.cardImage} />
   						<View style={styles.cardDetails}>
-  							<Text style={styles.cardTitle}>Food Name</Text>
+  							<Text style={styles.cardTitle}>{food.title}</Text>
                 <View style={styles.cardStar}>
-                  <Ionicons name='md-radio-button-on' color={EStyleSheet.value('$green')} size={20} />
-                  <Text style={[styles.foodType, { marginLeft: 5 }]}>A-LA-CARTE</Text>
+                  <Ionicons name='md-radio-button-on' color={food.veg ? EStyleSheet.value('$green') : EStyleSheet.value('$red') } size={20} />
+                  <Text style={[styles.foodType, { marginLeft: 5 }]}>{food.foodType}</Text>
                 </View>
   							<View style={styles.cardGenre}>
 										<Text style={styles.cardGenreItem}>
                       <FontAwesome name="rupee" size={20} color={EStyleSheet.value('$orangeTheme')} />
-                      <Text style={{ fontWeight: 'bold', fontSize: 15 }}>158</Text>
+                      <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{food.price}</Text>
                     </Text>
   							</View>
   							<View style={styles.cardNumbers}>
@@ -139,7 +167,7 @@ class Food extends Component {
 
   								<Text style={styles.cardRunningHours} />
   							</View>
-                <TouchableOpacity style={styles.buyButton}>
+                <TouchableOpacity style={styles.buyButton} onPress={() => this.addToCart(food)}>
                   <Text style={{ fontWeight: '500' }}>Buy</Text>
                 </TouchableOpacity>
   						</View>
@@ -154,13 +182,7 @@ class Food extends Component {
               </View>
               <View style={{ padding: 15 }}>
                 <Text style={{ color: EStyleSheet.value('$white') }}>
-                  Exquisite cordially mr happiness of neglected distrusts.
-                  Boisterous impossible unaffected he me everything.
-                  Is fine loud deal an rent open give. Find upon and sent spot song son eyes.
-                  Do endeavor he differed carriage is learning my graceful.
-                  Feel plan know is he like on pure. See burst found sir met think hopes are marry among.
-                  Delightful remarkably new assistance saw literature mrs favourable.
-
+                  {food.description}
                 </Text>
               </View>
               <View style={{ backgroundColor: EStyleSheet.value('$lightBlack'), borderBottomWidth: 3, borderColor: EStyleSheet.value('$orangeTheme'), paddingVertical: 10, paddingHorizontal: 15 }}>
@@ -180,4 +202,10 @@ class Food extends Component {
   }
 }
 
-export default Food;
+const mapsStateToProps = (state) => {
+  return {
+    cartItems: state.cartItems.cartItems
+  }
+}
+
+export default connect(mapsStateToProps, { addFoodToCart, getAllCartItems })(Food);

@@ -1,15 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { createStore, applyMiddleware, compose } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { logger } from 'redux-logger';
 import Login from './src/screens/Login';
 import { MainRoutes } from './Router';
+import reducers from './src/reducers';
+
+const store = createStore(reducers, {}, compose(
+  applyMiddleware(ReduxThunk, logger)
+));
 
 export default class App extends React.Component {
   render() {
     return (
-
+      <Provider store={store}>
         <MainRoutes />
-
+      </Provider>
     );
   }
 }

@@ -1,57 +1,33 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, Dimensions, RefreshControl } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { connect } from 'react-redux';
 import styles from '../styles/Cart';
+import { removeFoodFromCart } from '../actions';
 import { Ionicons, FontAwesome, Feather } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('window');
-const cartItem = [
-    {
-      id: 0,
-      img: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/portion_sizes_slideshow/getty_rm_photo_of_fish_meal_on_small_plate.jpg' ,
-      foodName: 'Chicken Masala',
-      quantity: 1,
-      price: 120.27
-    },
-    {
-      id: 1,
-      img: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/portion_sizes_slideshow/getty_rm_photo_of_fish_meal_on_small_plate.jpg' ,
-      foodName: 'Paneer Masala',
-      quantity: 1,
-      price: 90
-    },
-    // {
-    //   id: 3,
-    //   img: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/portion_sizes_slideshow/getty_rm_photo_of_fish_meal_on_small_plate.jpg' ,
-    //   foodName: 'Paneer Masala',
-    //   quantity: 1,
-    //   price: 90
-    // },
-    // {
-    //   id: 4,
-    //   img: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/portion_sizes_slideshow/getty_rm_photo_of_fish_meal_on_small_plate.jpg' ,
-    //   foodName: 'Paneer Masala',
-    //   quantity: 1,
-    //   price: 90
-    // },
-    {
-      id: 2,
-      img: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/portion_sizes_slideshow/getty_rm_photo_of_fish_meal_on_small_plate.jpg' ,
-      foodName: 'Chicken th bjsj',
-      quantity: 1,
-      price: 105.12
-    }
-]
+
 const total = 0;
 class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
       size: { width, height },
-      cartItem: cartItem,
+      cartItems: [],
       quantity: 1,
       currentCard: 0
     };
+  }
+
+  componentDidMount() {
+    console.log('CARt Reducer list', this.props.cartItems);
+    this.setState({ cartItems: this.props.cartItems });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('Cart nextProps', nextProps);
+    this.setState({ cartItems: nextProps.cartItems });
   }
 
   renderHeader = () => {
@@ -73,14 +49,11 @@ class Cart extends Component {
   }
 
   removeItemCart(id) {
-    const finalCart = this.state.cartItem.filter(d => {
-      return d.id !== id;
-    });
-    this.setState({ cartItem: finalCart });
+    this.props.removeFoodFromCart(id);
   }
 
   isEmptyMessageRender() {
-    if(this.state.cartItem.length === 0) {
+    if(this.state.cartItems.length === 0) {
       return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: -70 }}>
           <Image source={require('../constants/images/empty-cart.png')} style={{ width: 200, height: 150 }}/>
@@ -122,9 +95,9 @@ class Cart extends Component {
       this.setState({
         currentCard: i
       }, function() {
-        for (var j in this.state.cartItem) {
-           if (this.state.cartItem[j].id === i) {
-              this.state.cartItem[j].quantity = this.state.quantity;
+        for (var j in this.state.cartItems) {
+           if (this.state.cartItems[j].id === i) {
+              this.state.cartItems[j].quantity = this.state.quantity;
               break; //Stop this loop, we found it!
            }
          }
@@ -148,9 +121,9 @@ class Cart extends Component {
       this.setState({
         currentCard: i
       }, function() {
-        for (var j in this.state.cartItem) {
-           if (this.state.cartItem[j].id === i) {
-              this.state.cartItem[j].quantity = this.state.quantity;
+        for (var j in this.state.cartItems) {
+           if (this.state.cartItems[j].id === i) {
+              this.state.cartItems[j].quantity = this.state.quantity;
               break; //Stop this loop, we found it!
            }
          }
@@ -161,7 +134,7 @@ class Cart extends Component {
   }
 
   renderCartList() {
-    console.log('ITEM CART', this.state.cartItem);
+    console.log('ITEM CART', this.state.cartItems);
 
     return (
       <FlatList
@@ -179,13 +152,13 @@ class Cart extends Component {
             titleColor='white'
             progressBackgroundColor='white'
         />}
-        data={this.state.cartItem}
+        data={this.state.cartItems}
         renderItem={({ item }) =>  (
           <View style={[styles.cartCard, { marginTop: item.id === 0 ? 10 : 0 }]}>
             <View style={{ flexDirection: 'row' }}>
-              <Image source={{ uri: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/portion_sizes_slideshow/getty_rm_photo_of_fish_meal_on_small_plate.jpg' }} style={styles.cartItemImage} />
+              <Image source={{ uri: item.image }} style={styles.cartItemImage} />
               <View style={{ marginLeft: 10, paddingVertical: 5 }}>
-                <Text style={[styles.foodName, { marginBottom: 5 }]}>{item.foodName}</Text>
+                <Text style={[styles.foodName, { marginBottom: 5 }]}>{item.title}</Text>
                 <View>
                   <Text>
                     <FontAwesome name="rupee" size={15} color={EStyleSheet.value('$black')} style={{ paddingRight: 5 }} />
@@ -218,8 +191,8 @@ class Cart extends Component {
 
   calCulate() {
     total = 0;
-    for (var j in this.state.cartItem) {
-       total = total + (this.state.cartItem[j].quantity * this.state.cartItem[j].price);
+    for (var j in this.state.cartItems) {
+       total = total + (this.state.cartItems[j].quantity * this.state.cartItems[j].price);
        total = Math.floor(total*Math.pow(10,2))/(Math.pow(10,2));
      }
   }
@@ -238,4 +211,10 @@ class Cart extends Component {
   }
 }
 
-export default Cart;
+const mapsStateToProps = (state) => {
+  return {
+    cartItems: state.cartItems.cartItems
+  }
+}
+
+export default connect(mapsStateToProps, { removeFoodFromCart })(Cart);

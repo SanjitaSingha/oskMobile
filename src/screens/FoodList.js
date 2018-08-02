@@ -15,7 +15,7 @@ const nonVeg = [
     id: 0,
     title: 'Chicken Kera Special',
     image: 'http://www.philipsmall.co.uk/flash/food1.jpg',
-    description: 'The famous north Indian Chicken fodd Item',
+    description: 'The famous north Indian Chicken fodd Item Exquisite cordially mr happiness of neglected distrusts.Boisterous impossible unaffected he me everything.Is fine loud deal an rent open give. Find upon and sent spot song son eyes.Do endeavor he differed carriage is learning my graceful.Feel plan know is he like on pure. See burst found sir met think hopes are marry among.Delightful remarkably new assistance saw literature mrs favourable.',
     veg: true,
     foodType: 'A-LA-CARTE',
     price: '451.47'
@@ -24,7 +24,7 @@ const nonVeg = [
     id: 1,
     title: 'Chicken Kera Special',
     image: 'https://cdnimg.webstaurantstore.com/images/products/large/77391/480506.jpg',
-    description: 'The famous north Indian Chicken fodd Item',
+    description: 'The famous north Indian Chicken fodd Item Exquisite cordially mr happiness of neglected distrusts.Boisterous impossible unaffected he me everything.Is fine loud deal an rent open give. Find upon and sent spot song son eyes.Do endeavor he differed carriage is learning my graceful.Feel plan know is he like on pure. See burst found sir met think hopes are marry among.Delightful remarkably new assistance saw literature mrs favourable.',
     veg: false,
     foodType: 'MEAL',
     price: '451.47'
@@ -33,7 +33,8 @@ const nonVeg = [
     id: 2,
     title: 'Chicken Kera Special',
     image: 'http://www.philipsmall.co.uk/flash/food1.jpg',
-    description: 'The famous north Indian Chicken fodd Item',
+    description: 'The famous north Indian Chicken fodd Item Exquisite cordially mr happiness of neglected distrusts.Boisterous impossible unaffected he me everything.Is fine loud deal an rent open give. Find upon and sent spot song son eyes.Do endeavor he differed carriage is learning my graceful.Feel plan know is he like on pure. See burst found sir met think hopes are marry among.Delightful remarkably new assistance saw literature mrs favourable.',
+
     veg: true,
     foodType: 'A-LA-CARTE',
     price: '451.47'
@@ -42,7 +43,8 @@ const nonVeg = [
     id: 3,
     title: 'Chicken Kera Special',
     image: 'http://www.philipsmall.co.uk/flash/food1.jpg',
-    description: 'The famous north Indian Chicken fodd Item',
+    description: 'The famous north Indian Chicken fodd Item Exquisite cordially mr happiness of neglected distrusts.Boisterous impossible unaffected he me everything.Is fine loud deal an rent open give. Find upon and sent spot song son eyes.Do endeavor he differed carriage is learning my graceful.Feel plan know is he like on pure. See burst found sir met think hopes are marry among.Delightful remarkably new assistance saw literature mrs favourable.',
+
     veg: false,
     foodType: 'MEAL',
     price: '451.47'
@@ -51,7 +53,8 @@ const nonVeg = [
     id: 4,
     title: 'Chicken Kera Special',
     image: 'http://www.philipsmall.co.uk/flash/food1.jpg',
-    description: 'The famous north Indian Chicken fodd Item',
+    description: 'The famous north Indian Chicken fodd Item Exquisite cordially mr happiness of neglected distrusts.Boisterous impossible unaffected he me everything.Is fine loud deal an rent open give. Find upon and sent spot song son eyes.Do endeavor he differed carriage is learning my graceful.Feel plan know is he like on pure. See burst found sir met think hopes are marry among.Delightful remarkably new assistance saw literature mrs favourable.',
+
     veg: true,
     foodType: 'A-LA-CARTE',
     price: '451.47'
@@ -135,7 +138,7 @@ class FoodList extends Component {
           />}
           data={this.state.data}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('food')} activeOpacity={0.8} style={styles.foodListCard}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('food', { food: item })} activeOpacity={0.8} style={styles.foodListCard}>
               <Image
                 source={{ uri: item.image }}
                 style={styles.cardImage}
